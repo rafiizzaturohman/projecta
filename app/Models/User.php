@@ -2,27 +2,28 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
+     * Mass assignment protection: only block sensitive fields.
      */
-    protected $guarded = ['id'];
+    protected $guarded = [
+        'id',
+        'role', // tidak boleh sembarangan diisi user
+        'deleted_at',
+        'email_verified_at',
+        'remember_token',
+    ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
+     * Hide these when serializing to JSON (API, etc).
      */
     protected $hidden = [
         'password',
@@ -30,9 +31,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Type casting.
      */
     protected function casts(): array
     {
@@ -40,5 +39,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * (Opsional) Relasi ke matakuliah sebagai dosen
+     */
+    public function matakuliah()
+    {
+        return $this->hasMany(Matakuliah::class, 'lecturer_id');
+    }
+
+    /**
+     * (Opsional) Relasi ke task sebagai penanggung jawab
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    /**
+     * (Opsional) Relasi ke project sebagai anggota
+     */
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_members');
     }
 }
