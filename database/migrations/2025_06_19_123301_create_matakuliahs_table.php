@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('kd_matakuliah')->unique();
             $table->string('nama');
-            $table->string('semester');
-            $table->year('tahun');
-            $table->foreignId('lecturer_id')->constrained('users')->onDelete('cascade');
+            $table->integer('semester');
+            $table->integer('sks');
+            $table->foreignId('dosen_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
