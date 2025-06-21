@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('nim')->nullable()->unique();
             $table->string('nidn')->nullable()->unique();
+            $table->string('nip')->nullable()->unique();
             $table->string('prodi')->nullable();
             $table->enum('role', ['mahasiswa', 'dosen', 'admin'])->default('mahasiswa');
             $table->timestamp('email_verified_at')->nullable();
