@@ -16,7 +16,16 @@ return new class extends Migration
             $table->string('judul');
             $table->text('deskripsi')->nullable();
             $table->date('deadline')->nullable();
-            $table->foreignId('matakuliah_id')->constrained()->onDelete('cascade');
+            
+            $table->string('kd_prodi');
+            $table->foreign('kd_prodi')->references('kd_prodi')->on('prodis')->onDelete('cascade');
+            
+            $table->string('kd_matakuliah');
+            $table->foreign('kd_matakuliah')->references('kd_matakuliah')->on('matakuliahs')->onDelete('cascade');
+            
+            $table->string('mahasiswa_nim');
+            $table->foreign('mahasiswa_nim')->references('nim')->on('users')->onDelete('cascade');
+            
             $table->timestamps();
             $table->softDeletes();
         });

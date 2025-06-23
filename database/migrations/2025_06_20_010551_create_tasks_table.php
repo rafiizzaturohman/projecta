@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('judul');
             $table->text('deskripsi')->nullable();
             $table->date('deadline')->nullable();
+            $table->string('user_nim')->nullable();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreign('user_nim')->references('nim')->on('users')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

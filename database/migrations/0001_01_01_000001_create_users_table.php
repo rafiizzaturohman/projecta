@@ -18,10 +18,15 @@ return new class extends Migration
             $table->string('nim')->nullable()->unique();
             $table->string('nidn')->nullable()->unique();
             $table->string('nip')->nullable()->unique();
-            $table->string('prodi')->nullable();
+
+            $table->string('kd_prodi')->nullable();
+            $table->foreign('kd_prodi')->references('kd_prodi')->on('prodis')->onDelete('cascade');
+            
             $table->enum('role', ['mahasiswa', 'dosen', 'admin'])->default('mahasiswa');
+            
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
