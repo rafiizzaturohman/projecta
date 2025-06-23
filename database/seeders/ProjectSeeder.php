@@ -2,24 +2,22 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class ProjectSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         DB::table('projects')->insert([
             [
-                'judul'=>'Projecta',
-                'deskripsi'=>'Ini adalah sebuah aplikasi berbasis web yang dibuat untuk memudahkan mahasiswa ketika memanajemen tugas berkelompok',
-                'deadline'=>now(),
-                'matakuliah_id'=>1
-            ],
+                'judul' => 'Sistem Informasi Akademik',
+                'deskripsi' => 'Project kelompok mata kuliah Pemrograman Web.',
+                'deadline' => now()->addDays(30),
+                'kd_prodi' => '110',
+                'kd_matakuliah' => 'IF101',
+                'mahasiswa_nim' => '25110101',
+            ]
         ]);
     }
 }

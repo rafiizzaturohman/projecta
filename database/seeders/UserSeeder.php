@@ -1,50 +1,67 @@
 <?php
-
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         DB::table('users')->insert([
-            [
-                'nama' => 'Admin Satu',
-                'email' => 'admin@example.com',
-                'password' => Hash::make('12341234'),
-                'role' => 'admin',
-                'prodi' => null,
-                'nim' => null,
-                'nidn' => null,
-                'nip' => '0012234556',
-            ],
+            // Dosen
             [
                 'nama' => 'Dosen Satu',
-                'email' => 'dosen@example.com',
-                'password' => Hash::make('12341234'),
-                'role' => 'dosen',
-                'prodi' => null,
+                'email' => 'dosen@if.ac.id',
+                'password' => Hash::make('password'),
                 'nim' => null,
-                'nidn' => '0011223344',
+                'nidn' => '9876543210',
                 'nip' => null,
+                'kd_prodi' => null,
+                'role' => 'dosen',
+                'email_verified_at' => now(),
+                'created_at' => now(),
             ],
+            // Mahasiswa A
             [
-                'nama' => 'Mahasiswa Satu',
-                'email' => 'mhs@example.com',
-                'password' => Hash::make('12341234'),
-                'role' => 'mahasiswa',
-                'prodi' => 'S1 - Teknik Informatika',
-                'nim' => '24110153',
+                'nama' => 'Mahasiswa A',
+                'email' => 'mahasiswaa@if.ac.id',
+                'password' => Hash::make('password'),
+                'nim' => '25110101',
                 'nidn' => null,
                 'nip' => null,
+                'kd_prodi' => '110',
+                'role' => 'mahasiswa',
+                'email_verified_at' => now(),
+                'created_at' => now(),
+            ],
+            // Mahasiswa B
+            [
+                'nama' => 'Mahasiswa B',
+                'email' => 'mahasiswab@if.ac.id',
+                'password' => Hash::make('password'),
+                'nim' => '25110102',
+                'nidn' => null,
+                'nip' => null,
+                'kd_prodi' => '110',
+                'role' => 'mahasiswa',
+                'email_verified_at' => now(),
+                'created_at' => now(),
+            ],
+            // Admin
+            [
+                'nama' => 'Admin Sistem',
+                'email' => 'admin@if.ac.id',
+                'password' => Hash::make('admin123'),
+                'nim' => null,
+                'nidn' => null,
+                'nip' => '2482746238273482',
+                'kd_prodi' => null,
+                'role' => 'admin',
+                'email_verified_at' => now(),
+                'created_at' => now(),
             ],
         ]);
     }

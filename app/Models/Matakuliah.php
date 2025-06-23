@@ -13,6 +13,9 @@ class Matakuliah extends Model
 
     protected $guarded = ['id'];
 
+    /**
+     * Relasi ke dosen (User) berdasarkan nidn
+     */
     public function dosen()
     {
         return $this->belongsTo(User::class, 'dosen_nidn', 'nidn');

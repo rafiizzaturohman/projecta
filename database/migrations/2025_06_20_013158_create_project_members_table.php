@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('project_members', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
+            $table->enum('role', ['ketua', 'anggota'])->default('anggota');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();

@@ -44,10 +44,11 @@ class User extends Authenticatable
     /**
      * (Opsional) Relasi ke matakuliah sebagai dosen
      */
-    public function matakuliah()
+    public function matakuliahs()
     {
-        return $this->hasMany(Matakuliah::class, 'lecturer_id');
+        return $this->hasMany(Matakuliah::class, 'dosen_nidn', 'nidn');
     }
+
 
     /**
      * (Opsional) Relasi ke task sebagai penanggung jawab
@@ -64,4 +65,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Project::class, 'project_members');
     }
+
+    /**
+     * (Opsional) Relasi ke prodi sebagai penanggung jawab
+     */
+    public function prodi()
+{
+    return $this->belongsTo(Prodi::class, 'kd_prodi', 'kd_prodi');
+}
+
 }
