@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('mahasiswa_nim');
             $table->foreign('mahasiswa_nim')->references('nim')->on('users')->onDelete('cascade');
             
+            $table->enum('status', ['belum', 'proses', 'selesai'])->default('belum');
+
             $table->timestamps();
             $table->softDeletes();
         });

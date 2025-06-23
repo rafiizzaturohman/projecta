@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('user_nim')->nullable();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->foreign('user_nim')->references('nim')->on('users')->onDelete('set null');
+
+            $table->enum('status', ['belum', 'proses', 'selesai'])->default('belum');
+
             $table->timestamps();
             $table->softDeletes();
         });
