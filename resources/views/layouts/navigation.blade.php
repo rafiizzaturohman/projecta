@@ -25,7 +25,7 @@
                             {{ __('Tugas') }}
                         </x-nav-link>
                     @else
-                        <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
+                        <x-nav-link :href="route('userManagement.index')" :active="request()->routeIs('userManagement.index')">
                             {{ _('Manajemen Pengguna') }}
                         </x-nav-link>
                     @endif

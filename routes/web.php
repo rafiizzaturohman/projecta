@@ -1,28 +1,43 @@
 <?php
 
-use App\Http\Controllers\MatakuliahController;
-use App\Http\Controllers\ProdiController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\ProjectMemberController;
-use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{
+    ProfileController,
+    ProdiController,
+    MatakuliahController,
+    ProjectController,
+    ProjectMemberController,
+    TaskController,
+    UserController
+};
+use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', function () {
-    return view('auth/login');
+    return view('auth.login');
 });
 
+// Dashboard - hanya untuk user yang sudah login dan verifikasi email
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+// Group khusus ADMIN
+Route::middleware([
+    'auth',
+    'verified',
+    RoleMiddleware::class . ':admin'
+])->group(function () {
+    Route::resource('userManagement', UserController::class);
+    Route::resource('prodis', ProdiController::class);
+    Route::resource('matakuliahs', MatakuliahController::class);
+});
+
+// Group untuk semua user setelah login
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('prodis', ProdiController::class);
-    Route::resource('matakuliahs', MatakuliahController::class);
     Route::resource('projects', ProjectController::class);
     Route::resource('project_members', ProjectMemberController::class);
     Route::resource('tasks', TaskController::class);
