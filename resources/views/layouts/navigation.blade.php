@@ -20,9 +20,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @if ($role === 'mahasiswa' || $role === 'dosen')
+                    @if ($role !== 'admin')
                         <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
-                            {{ __('Tasks') }}
+                            {{ __('Tugas') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
+                            {{ _('Manajemen Pengguna') }}
                         </x-nav-link>
                     @endif
                 </div>
@@ -46,7 +50,7 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
-                        </x-dropdown-link>
+                        </x-dropdown-link>  
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
