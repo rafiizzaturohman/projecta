@@ -12,27 +12,19 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
     public function edit(Request $request): View
     {
         return view('profile.edit', [
             'user' => $request->user(),
-            'prodis' => Prodi::all(), // kirim data prodi jika perlu dropdown
+            'prodis' => Prodi::all(),
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
-
         $data = $request->validated();
 
-        // Cek jika email berubah → reset verifikasi
         if ($data['email'] !== $user->email) {
             $user->email_verified_at = null;
         }
@@ -40,21 +32,31 @@ class ProfileController extends Controller
         $user->fill([
             'nama' => $data['nama'],
             'email' => $data['email'],
-            'nim' => $data['nim'] ?? null,
-            'nidn' => $data['nidn'] ?? null,
-            'nip' => $data['nip'] ?? null,
-            'kd_prodi' => $data['kd_prodi'] ?? null,
-            'role' => $data['role'], // pastikan sudah tervalidasi
+            'role' => $data['role'],
         ]);
+
+        if ($data['role'] === 'mahasiswa') {
+            $user->nim = $data['nim'] ?? null;
+            $user->kd_prodi = $data['kd_prodi'] ?? null;
+            $user->nidn = null;
+            $user->nip = null;
+        } elseif ($data['role'] === 'dosen') {
+            $user->nidn = $data['nidn'] ?? null;
+            $user->nip = $data['nip'] ?? null;
+            $user->nim = null;
+            $user->kd_prodi = null;
+        } elseif ($data['role'] === 'admin') {
+            $user->nip = $data['nip'] ?? null;
+            $user->nim = null;
+            $user->kd_prodi = null;
+            $user->nidn = null;
+        }
 
         $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
@@ -62,7 +64,6 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
-
         Auth::logout();
         $user->delete();
 
