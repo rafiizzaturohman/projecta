@@ -12,6 +12,7 @@
             </thead>
             <tbody>
                 @foreach ($tasks as $item)
+                @csrf
                 <tr>
                     <td>{{ $item->judul }}</td>
                     <td>{{ $item->deskripsi }}</td>
