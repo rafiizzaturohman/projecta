@@ -21,11 +21,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('prodi', ProdiController::class);
-    Route::resource('matakuliah', MatakuliahController::class);
-    Route::resource('project', ProjectController::class);
-    Route::resource('project_member', ProjectMemberController::class);
-    Route::resource('task', TaskController::class);
+    Route::resource('prodis', ProdiController::class);
+    Route::resource('matakuliahs', MatakuliahController::class);
+    Route::resource('projects', ProjectController::class);
+    Route::resource('project_members', ProjectMemberController::class);
+    Route::resource('tasks', TaskController::class);
 });
 
 require __DIR__.'/auth.php';

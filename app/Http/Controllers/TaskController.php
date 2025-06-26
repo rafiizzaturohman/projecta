@@ -11,7 +11,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::with(['project', 'user'])->get();
-        return response()->json($tasks);
+        return view('tasks.index', compact('tasks'));
     }
 
     // Menyimpan task baru
