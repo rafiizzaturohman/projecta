@@ -66,19 +66,14 @@
 
                     <div x-show="open" x-transition class="absolute right-0 mt-2 w-48 rounded-md shadow-lg
                                                            bg-surface dark:bg-dark-surface border border-border dark:border-dark-border space-y-1 p-1 z-50">
-                        <a href="{{ route('profile.edit') }}"
-                           class="block px-4 py-2 text-sm text-text-secondary dark:text-dark-text-secondary
-                                  hover:bg-primary-hover dark:hover:bg-dark-primary-hover hover:text-white rounded transition">
+                        <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
-                        </a>
+                        </x-dropdown-link>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <a href="{{ route('logout') }}"
-                               onclick="event.preventDefault(); this.closest('form').submit();"
-                               class="block px-4 py-2 text-sm text-text-secondary dark:text-dark-text-secondary
-                                      hover:bg-primary-hover dark:hover:bg-dark-primary-hover hover:text-white rounded transition">
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
                                 {{ __('Log Out') }}
-                            </a>
+                            </x-dropdown-link>
                         </form>
                     </div>
                 </div>
