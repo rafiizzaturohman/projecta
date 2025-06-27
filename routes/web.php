@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // routes/web.php
     Route::resource('projects', ProjectController::class);
     Route::resource('project_members', ProjectMemberController::class);
     Route::resource('tasks', TaskController::class);

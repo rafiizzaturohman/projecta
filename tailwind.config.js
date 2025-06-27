@@ -20,7 +20,6 @@ export default {
                     ...defaultTheme.fontFamily.sans,
                 ],
             },
-
             colors: {
                 // Light Theme (default)
                 primary: "#4C9F9A",
