@@ -5,12 +5,12 @@
                 <div class="p-6 text-gray-900">
                     @php
                         $role = auth()->user()->role;
-                        $user = auth()->user()->nama;
+                        $userName = auth()->user()->nama;
                     @endphp
 
                     @if ($role === 'admin')
                         <h3 class="text-xl font-bold mb-2">Admin Dashboard</h3>
-                        <p>Welcome, {{ $user }}! You have full access to the system.</p>
+                        <p>Welcome, {{ $userName }}! You have full access to the system.</p>
                         <ul class="list-disc list-inside mt-3">
                             <li>Manage Users</li>
                             <li>View All Projects</li>
@@ -19,14 +19,14 @@
 
                     @elseif ($role === 'dosen')
                         <h3 class="text-xl font-bold mb-2">Dosen Dashboard</h3>
-                        <p>Welcome`, {{ $user }}! You can monitor student projects.</p>
+                        <p>Welcome`, {{ $userName }}! You can monitor student projects.</p>
                         <ul class="list-disc list-inside mt-3">
                             <li>View Assigned Courses</li>
                             <li>Review Project Submissions</li>
                         </ul>
 
                     @elseif ($role === 'mahasiswa')
-                        <p><strong>Hai, {{ $user }}!</strong> <br> <br>
+                        <p><strong>Hai, {{ $userName }}!</strong> <br> <br>
                             <strong>Atur semua Proyek dan Tugas Kamu disini!</strong>
                         </p>
                         <ul class="list-disc list-inside mt-3">

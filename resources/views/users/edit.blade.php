@@ -1,67 +1,82 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Edit User</h2>
-    </x-slot>
-
     <div class="p-6">
-        <form method="POST" action="{{ route('admin.users.update', $user) }}">
-            @csrf @method('PUT')
+        <h2 class="text-xl font-semibold mb-4">Edit Data User</h2>
 
+        <form method="POST" action="{{ route('userManagement.update', $user->id) }}" x-data="{ role: '{{ old('role', $user->role) }}' }">
+            @csrf
+            @method('PUT')
+
+            <!-- Nama -->
             <div class="mb-4">
                 <x-input-label for="nama" :value="'Nama'" />
-                <x-text-input name="nama" id="nama" value="{{ old('nama', $user->nama) }}" class="w-full" required />
+                <x-text-input id="nama" name="nama" type="text" class="w-full"
+                    :value="old('nama', $user->nama)" required />
                 <x-input-error :messages="$errors->get('nama')" class="mt-1" />
             </div>
 
+            <!-- Email -->
             <div class="mb-4">
                 <x-input-label for="email" :value="'Email'" />
-                <x-text-input name="email" id="email" value="{{ old('email', $user->email) }}" class="w-full" required />
+                <x-text-input id="email" name="email" type="email" class="w-full"
+                    :value="old('email', $user->email)" required />
                 <x-input-error :messages="$errors->get('email')" class="mt-1" />
             </div>
 
+            <!-- Role -->
             <div class="mb-4">
                 <x-input-label for="role" :value="'Role'" />
-                <select name="role" id="role" class="w-full">
-                    <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                    <option value="dosen" {{ $user->role == 'dosen' ? 'selected' : '' }}>Dosen</option>
-                    <option value="mahasiswa" {{ $user->role == 'mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>
+                <select id="role" name="role" x-model="role" class="w-full border-gray-300 rounded-md">
+                    <option value="admin">Admin</option>
+                    <option value="dosen">Dosen</option>
+                    <option value="mahasiswa">Mahasiswa</option>
                 </select>
                 <x-input-error :messages="$errors->get('role')" class="mt-1" />
             </div>
 
-            <div class="mb-4">
+            <!-- NIM -->
+            <div class="mb-4" x-show="role === 'mahasiswa'" x-cloak>
                 <x-input-label for="nim" :value="'NIM'" />
-                <x-text-input name="nim" id="nim" value="{{ old('nim', $user->nim) }}" class="w-full" />
+                <x-text-input id="nim" name="nim" type="text" class="w-full"
+                    :value="old('nim', $user->nim)" />
                 <x-input-error :messages="$errors->get('nim')" class="mt-1" />
             </div>
 
-            <div class="mb-4">
+            <!-- NIDN -->
+            <div class="mb-4" x-show="role === 'dosen'" x-cloak>
                 <x-input-label for="nidn" :value="'NIDN'" />
-                <x-text-input name="nidn" id="nidn" value="{{ old('nidn', $user->nidn) }}" class="w-full" />
+                <x-text-input id="nidn" name="nidn" type="text" class="w-full"
+                    :value="old('nidn', $user->nidn)" />
                 <x-input-error :messages="$errors->get('nidn')" class="mt-1" />
             </div>
 
-            <div class="mb-4">
+            <!-- NIP -->
+            <div class="mb-4" x-show="role === 'dosen' || role === 'admin'" x-cloak>
                 <x-input-label for="nip" :value="'NIP'" />
-                <x-text-input name="nip" id="nip" value="{{ old('nip', $user->nip) }}" class="w-full" />
+                <x-text-input id="nip" name="nip" type="text" class="w-full"
+                    :value="old('nip', $user->nip)" />
                 <x-input-error :messages="$errors->get('nip')" class="mt-1" />
             </div>
 
-            <div class="mb-4">
+            <!-- Program Studi -->
+            <div class="mb-4" x-show="role === 'mahasiswa'" x-cloak>
                 <x-input-label for="kd_prodi" :value="'Program Studi'" />
-                <select name="kd_prodi" id="kd_prodi" class="w-full">
+                <select name="kd_prodi" id="kd_prodi" class="w-full border-gray-300 rounded-md">
                     <option value="">-- Pilih Prodi --</option>
                     @foreach ($prodis as $prodi)
-                        <option value="{{ $prodi->kd_prodi }}" {{ $user->kd_prodi == $prodi->kd_prodi ? 'selected' : '' }}>
-                            {{ $prodi->nama }}
+                        <option value="{{ $prodi->kd_prodi }}"
+                            {{ old('kd_prodi', $user->kd_prodi) == $prodi->kd_prodi ? 'selected' : '' }}>
+                            {{ $prodi->kd_prodi }} - {{ $prodi->nama }}
                         </option>
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('kd_prodi')" class="mt-1" />
             </div>
 
+            <!-- Tombol Simpan -->
             <div class="mt-6">
-                <x-primary-button>Simpan</x-primary-button>
+                <x-primary-button>
+                    Simpan
+                </x-primary-button>
             </div>
         </form>
     </div>

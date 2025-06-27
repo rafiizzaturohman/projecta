@@ -17,7 +17,6 @@
         @csrf
         @method('patch')
 
-        @if ($role !== 'admin')    
             <div>
                 <x-input-label for="nama" :value="__('Nama')" />
                 <x-text-input id="nama" name="nama" type="text" class="mt-1 block w-full"
@@ -93,9 +92,6 @@
                     </p>
                 @endif
             </div>
-        @else
-            
-        @endif
         <!-- Nama -->
     </form>
 </section>

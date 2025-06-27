@@ -49,23 +49,27 @@ class UserController extends Controller
         return redirect()->route('userManagement.index')->with('success', 'User berhasil ditambahkan.');
     }
 
-    public function edit(User $user)
+    public function edit(User $user, $id)
     {
+        $user = $user::findOrFail($id);
         $prodis = Prodi::all();
         return view('users.edit', compact('user', 'prodis'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user, $id)
     {
+
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($id)],
             'role' => ['required', Rule::in(['admin', 'dosen', 'mahasiswa'])],
-            'nim' => ['nullable', 'string', Rule::unique('users')->ignore($user->id)],
-            'nidn' => ['nullable', 'string', Rule::unique('users')->ignore($user->id)],
+            'nim' => ['nullable', 'string', Rule::unique('users')->ignore($id)],
+            'nidn' => ['nullable', 'string', Rule::unique('users')->ignore($id)],
             'nip' => ['nullable', 'string'],
             'kd_prodi' => ['nullable', 'exists:prodis,kd_prodi'],
         ]);
+
+        $findUser = $user::findOrFail($id);
 
         // Sesuaikan berdasarkan role
         if ($validated['role'] !== 'mahasiswa') {
@@ -77,7 +81,7 @@ class UserController extends Controller
             $validated['nidn'] = null;
         }
 
-        $user->update($validated);
+        $findUser->update($validated);
 
         return redirect()->route('userManagement.index')->with('success', 'User berhasil diperbarui.');
     }
