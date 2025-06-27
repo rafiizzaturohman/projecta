@@ -35,16 +35,17 @@ class UserController extends Controller
             'kd_prodi' => ['nullable', 'exists:prodis,kd_prodi'],
         ]);
 
-        $user = User::create([
+        User::create([
             'nama' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'role' => $request->role, // jangan ditimpa
             'nim' => $request->role === 'mahasiswa' ? $request->nim : null,
             'nidn' => $request->role === 'dosen' ? $request->nidn : null,
             'nip' => $request->nip,
             'kd_prodi' => $request->role === 'mahasiswa' ? $request->kd_prodi : null,
         ]);
+
 
         return redirect()->route('userManagement.index')->with('success', 'User berhasil ditambahkan.');
     }

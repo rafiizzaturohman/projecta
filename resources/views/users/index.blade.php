@@ -1,10 +1,6 @@
 <x-app-layout>
-
     <div class="p-6">
-        @if(session('success'))
-            <div class="mb-4 text-green-600">{{ session('success') }}</div>
-        @endif
-
+        <a href="{{ route('userManagement.create') }}">Tambah Data</a>
         <table class="w-full border">
             <thead>
                 <tr class="bg-gray-100">
@@ -32,6 +28,11 @@
                 @endforeach
             </tbody>
         </table>
+
+        @if(session('success'))
+            <div  x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+                    class="text-sm text-green-600">{{ session('success') }}</div>
+        @endif
 
         <div class="mt-4">
             {{ $users->links() }}
