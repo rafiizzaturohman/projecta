@@ -1,5 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      x-data="{ darkMode: localStorage.getItem('theme') === 'dark' }"
+      x-init="$watch('darkMode', value => {
+            localStorage.setItem('theme', value ? 'dark' : 'light');
+            document.documentElement.classList.toggle('dark', value);
+      })"
+      :class="{ 'dark': darkMode }"
+      class="transition-colors duration-300"
+>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
