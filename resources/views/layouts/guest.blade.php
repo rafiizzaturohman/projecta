@@ -37,7 +37,7 @@
         </div>
 
         <!-- Card -->
-        <div class="relative w-full sm:max-w-md mt-8 p-6 bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-2xl shadow-card transition-all duration-300">
+        <div class="relative w-full sm:max-w-md mt-8 p-6 bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-xl shadow-card transition-all duration-300">
 
             <!-- Toggle Button (Optional placement here) -->
             <div class="absolute top-4 right-4">
