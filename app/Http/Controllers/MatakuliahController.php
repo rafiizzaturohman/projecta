@@ -11,7 +11,7 @@ class MatakuliahController extends Controller
     public function index()
     {
         $matakuliahs = Matakuliah::with('dosen')->get();
-        return response()->json($matakuliahs);
+        return  view('matakuliah.index', compact('matakuliahs'));
     }
 
     // Menyimpan matakuliah baru
@@ -26,14 +26,13 @@ class MatakuliahController extends Controller
         ]);
 
         $matakuliah = Matakuliah::create($validated);
-        return response()->json($matakuliah, 201);
+        return redirect('matakuliah');
     }
 
     // Menampilkan detail satu matakuliah
-    public function show($id)
+    public function create()
     {
-        $matakuliah = Matakuliah::with('dosen')->findOrFail($id);
-        return response()->json($matakuliah);
+        return view('matakuliah.create');
     }
 
     // Memperbarui matakuliah
@@ -50,7 +49,7 @@ class MatakuliahController extends Controller
         ]);
 
         $matakuliah->update($validated);
-        return response()->json($matakuliah);
+        return redirect('matakuliah');
     }
 
     // Menghapus matakuliah
@@ -58,7 +57,6 @@ class MatakuliahController extends Controller
     {
         $matakuliah = Matakuliah::findOrFail($id);
         $matakuliah->delete();
-
-        return response()->json(['message' => 'Matakuliah berhasil dihapus']);
+        return redirect('matakuliah')->with('success', 'Matakuliah deleted successfully');
     }
 }

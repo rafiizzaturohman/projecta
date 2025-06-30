@@ -27,14 +27,13 @@ class TaskController extends Controller
         ]);
 
         $task = Task::create($validated);
-        return response()->json($task, 201);
+        return redirect('tasks')->with('success', 'Task created successfully');
     }
 
     // Menampilkan detail satu task
-    public function show($id)
+    public function create()
     {
-        $task = Task::with(['project', 'user'])->findOrFail($id);
-        return response()->json($task);
+       return view('tasks.create');
     }
 
     // Memperbarui task
@@ -52,7 +51,7 @@ class TaskController extends Controller
         ]);
 
         $task->update($validated);
-        return response()->json($task);
+        return redirect('tasks')->with('success', 'Task updated successfully');
     }
 
     // Menghapus task
@@ -60,7 +59,6 @@ class TaskController extends Controller
     {
         $task = Task::findOrFail($id);
         $task->delete();
-
-        return response()->json(['message' => 'Tugas berhasil dihapus']);
+        return redirect('tasks')->with('success', 'Task deleted successfully');
     }
 }

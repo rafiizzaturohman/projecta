@@ -11,7 +11,7 @@ class ProjectMemberController extends Controller
     public function index()
     {
         $members = ProjectMember::with(['project', 'user'])->get();
-        return response()->json($members);
+        return view('project_members.index', compact('members'));
     }
 
     // Menambahkan anggota ke proyek
@@ -24,14 +24,13 @@ class ProjectMemberController extends Controller
         ]);
 
         $member = ProjectMember::create($validated);
-        return response()->json($member, 201);
+        return redirect()->route('project_members.index')->with('success', 'Anggota proyek berhasil ditambahkan');
     }
 
     // Menampilkan detail anggota proyek tertentu
-    public function show($id)
+    public function create()
     {
-        $member = ProjectMember::with(['project', 'user'])->findOrFail($id);
-        return response()->json($member);
+        return view('project_members.create');
     }
 
     // Memperbarui data anggota proyek
@@ -46,7 +45,7 @@ class ProjectMemberController extends Controller
         ]);
 
         $member->update($validated);
-        return response()->json($member);
+        return redirect()->route('project_members.index')->with('success', 'Anggota proyek berhasil diperbarui');
     }
 
     // Menghapus anggota dari proyek
@@ -54,7 +53,6 @@ class ProjectMemberController extends Controller
     {
         $member = ProjectMember::findOrFail($id);
         $member->delete();
-
-        return response()->json(['message' => 'Anggota proyek berhasil dihapus']);
+        return redirect()->route('project_members.index')->with('success', 'Anggota proyek berhasil dihapus');
     }
 }

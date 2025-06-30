@@ -11,7 +11,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::with(['prodi', 'matakuliah', 'mahasiswa'])->get();
-        return response()->json($projects);
+        return view('projects.index', compact('projects'));
     }
 
     // Menyimpan project baru
@@ -28,14 +28,13 @@ class ProjectController extends Controller
         ]);
 
         $project = Project::create($validated);
-        return response()->json($project, 201);
+        return redirect('projects')->with('success', 'Project created successfully');
     }
 
     // Menampilkan detail satu project
-    public function show($id)
+    public function create()
     {
-        $project = Project::with(['prodi', 'matakuliah', 'mahasiswa'])->findOrFail($id);
-        return response()->json($project);
+        return view('projects.create');
     }
 
     // Memperbarui data project
@@ -54,7 +53,7 @@ class ProjectController extends Controller
         ]);
 
         $project->update($validated);
-        return response()->json($project);
+        return rediret('projects')->with('success', 'Project updated successfully');
     }
 
     // Menghapus project
@@ -62,7 +61,6 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         $project->delete();
-
-        return response()->json(['message' => 'Project berhasil dihapus']);
+        return redirect('projects')->with('success', 'Project deleted successfully');
     }
 }
