@@ -25,9 +25,17 @@
                         <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
                             {{ __('Tugas') }}
                         </x-nav-link>
+
+                        <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                            {{ __('Project') }}
+                        </x-nav-link>
                     @else
                         <x-nav-link :href="route('userManagement.index')" :active="request()->routeIs('userManagement.index')">
                             {{ __('Manajemen Pengguna') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('prodi.index')" :active="request()->routeIs('prodi.index')">
+                            {{ __('Program Studi') }}
                         </x-nav-link>
                     @endif
                 </div>

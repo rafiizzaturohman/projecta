@@ -1,29 +1,20 @@
 <section class="space-y-6">
-        <table id="tasks-table">
+        <table id="prodi-table">
             <thead>
                 <tr>
-                    <th>Judul</th>
-                    <th>Deskripsi</th>
-                    <th>Deadline</th>
-                    <th>NIM</th>
-                    <th>Project</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
+                    <th>Kd_Prodi</th>
+                    <th>Nama</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tasks as $item)
+                @foreach ($prodi as $item)
                 @csrf
                 <tr>
-                    <td>{{ $item->judul }}</td>
-                    <td>{{ $item->deskripsi }}</td>
-                    <td>{{ $item->deadline }}</td>
-                    <td>{{ $item->user_nim }}</td>
-                    <td>{{ $item->project->judul }}</td>
-                    <td>{{ $item->status }}</td>
+                    <td>{{ $item->kd_prodi }}</td>
+                    <td>{{ $item->nama }}</td>
                     <td class="px-6 py-4">
                                 <div class="flex gap-2">
-                                    <a href="{{ route('tasks.edit', $item->id) }}"
+                                    <a href="{{ route('prodi.edit', $item->id) }}"
                                        class="text-blue-600 dark:text-blue-400 hover:underline">Edit</a>
     
                                     <button
@@ -58,7 +49,7 @@
                                         Batal
                                     </button>
     
-                                    <form method="POST" action="{{ route('userManagement.destroy', $item->id) }}">
+                                    <form method="POST" action="{{ route('prodi.destroy', $item->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button
