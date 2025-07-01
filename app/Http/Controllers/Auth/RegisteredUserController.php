@@ -36,31 +36,20 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
 
-        // Tambahkan validasi tambahan untuk mahasiswa
+        // Tambahkan validasi untuk mahasiswa
         if ($request->role === 'mahasiswa') {
-            $baseRules['kd_prodi']    = ['required', 'exists:prodis,kd_prodi'];
-            $baseRules['tahun_masuk'] = ['required', 'digits:2'];
+            $baseRules['nim']      = ['required', 'string', 'unique:users,nim'];
+            $baseRules['kd_prodi'] = ['required', 'exists:prodis,kd_prodi'];
         }
 
         $validated = $request->validate($baseRules);
-
-        $nim = null;
-
-        if ($request->role === 'mahasiswa') {
-            // Generate NIM = tahun + kd_prodi + urutan
-            $tahun    = $request->tahun_masuk; // e.g. 25
-            $kdProdi  = str_pad($request->kd_prodi, 3, '0', STR_PAD_LEFT); // e.g. 110
-            $count    = User::where('kd_prodi', $request->kd_prodi)->whereNotNull('nim')->count() + 1;
-            $urutan   = str_pad($count, 3, '0', STR_PAD_LEFT); // e.g. 153
-            $nim      = $tahun . $kdProdi . $urutan; // 25110153
-        }
 
         $user = User::create([
             'nama'     => $request->nama,
             'email'    => $request->email,
             'role'     => $request->role,
             'kd_prodi' => $request->role === 'mahasiswa' ? $request->kd_prodi : null,
-            'nim'      => $nim,
+            'nim'      => $request->role === 'mahasiswa' ? $request->nim : null,
             'password' => Hash::make($request->password),
         ]);
 

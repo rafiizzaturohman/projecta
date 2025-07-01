@@ -16,7 +16,6 @@ class User extends Authenticatable
      */
     protected $guarded = [
         'id',
-        'role', // tidak boleh sembarangan diisi user
         'deleted_at',
         'email_verified_at',
         'remember_token',
