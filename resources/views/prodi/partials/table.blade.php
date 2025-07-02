@@ -4,9 +4,8 @@
             class="min-w-full text-base text-left divide-y divide-border dark:divide-dark-border text-text-primary dark:text-dark-text-primary">
             <thead class="dark:bg-dark-muted text-md font-semibold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary">
                 <tr>
-                    <x-table-header>Kode Program Studi</x-table-header>
+                    <x-table-header>Kd_Prodi</x-table-header>
                     <x-table-header>Nama</x-table-header>
-                    <x-table-header>Aksi</x-table-header>
                 </tr>
             </thead>
             
@@ -24,18 +23,17 @@
                                 Edit
                             </a>
     
-                            <button
-                                type="button"
-                                class="text-danger hover:underline"
-                                x-data
-                                x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $item->id }}')"
-                            >
-                                <i class="fa-solid fa-trash"></i>
-                                Hapus
-                            </button>
-                        </div>
-                    </x-table-body>
-                </tr>
+                                    <button
+                                        type="button"
+                                        class="text-danger hover:underline"
+                                        x-data
+                                        x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $item->id }}')"
+                                    >
+                                        Hapus
+                                    </button>
+                                </div>
+                            </x-table-body>
+                        </tr>
     
                     <!-- Modal -->
                         <x-modal name="confirm-delete-{{ $item->id }}" :show="false" maxWidth="sm">
