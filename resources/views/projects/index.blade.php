@@ -1,6 +1,6 @@
 <x-app-layout>
     {{-- Tabel User --}}
-    @include('projects.partials.project')
+    @include('projects.partials.table')
 
     {{-- Flash Success Message --}}
     @if(session('success'))

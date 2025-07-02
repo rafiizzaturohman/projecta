@@ -34,11 +34,7 @@
                             {{ __('Manajemen Pengguna') }}
                         </x-nav-link>
 
-<<<<<<< HEAD
                         <x-nav-link :href="route('userManagement.index')" :active="request()->routeIs('userManagement.index')">
-=======
-                        <x-nav-link :href="route('prodis.index')" :active="request()->routeIs('prodis.index')">
->>>>>>> 9e3bd6221fc05790711a7c388a85bdafd8dbdb3f
                             {{ __('Program Studi') }}
                         </x-nav-link>
                     @endif
