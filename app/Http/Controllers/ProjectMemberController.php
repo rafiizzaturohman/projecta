@@ -33,6 +33,13 @@ class ProjectMemberController extends Controller
         return view('project_members.create');
     }
 
+    public function edit($id)
+    {
+        $projmember = ProjectMember::findOrFail($id);
+        
+        return view('project_members.create', compact('projmember'));
+    }
+
     // Memperbarui data anggota proyek
     public function update(Request $request, $id)
     {

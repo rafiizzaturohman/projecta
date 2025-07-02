@@ -1,35 +1,43 @@
-<section class="space-y-6">
-        <table id="prodi-table">
-            <thead>
+<section class="px-4 py-6 sm:px-6 lg:px-8 max-w-7xl w-auto mx-auto">
+    <div class="overflow-x-auto rounded-lg shadow-soft bg-surface dark:bg-dark-surface">
+        <table id="prodi-table"
+            class="min-w-full text-base text-left divide-y divide-border dark:divide-dark-border text-text-primary dark:text-dark-text-primary">
+            <thead class="dark:bg-dark-muted text-md font-semibold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary">
                 <tr>
-                    <th>Kd_Prodi</th>
-                    <th>Nama</th>
+                    <x-table-header>Kode Program Studi</x-table-header>
+                    <x-table-header>Nama</x-table-header>
+                    <x-table-header>Aksi</x-table-header>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ($prodi as $item)
+            
+            <tbody class="divide-y divide-border dark:divide-dark-border">
+                @foreach ($prodis as $item)
                 @csrf
                 <tr>
-                    <td>{{ $item->kd_prodi }}</td>
-                    <td>{{ $item->nama }}</td>
-                    <td class="px-6 py-4">
-                                <div class="flex gap-2">
-                                    <a href="{{ route('prodi.edit', $item->id) }}"
-                                       class="text-blue-600 dark:text-blue-400 hover:underline">Edit</a>
+                    <x-table-body>{{ $item->kd_prodi }}</x-table-body>
+                    <x-table-body>{{ $item->nama }}</x-table-body>
+                    <x-table-body>
+                        <div class="flex gap-2">
+                            <a href="{{ route('prodis.edit', $item->id) }}"
+                                class="text-blue-600 dark:text-blue-400 hover:underline">
+                                <i class="fa-solid fa-pen"></i>
+                                Edit
+                            </a>
     
-                                    <button
-                                        type="button"
-                                        class="text-danger hover:underline"
-                                        x-data
-                                        x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $item->id }}')"
-                                    >
-                                        Hapus
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                            <button
+                                type="button"
+                                class="text-danger hover:underline"
+                                x-data
+                                x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $item->id }}')"
+                            >
+                                <i class="fa-solid fa-trash"></i>
+                                Hapus
+                            </button>
+                        </div>
+                    </x-table-body>
+                </tr>
     
-                        <!-- Modal -->
+                    <!-- Modal -->
                         <x-modal name="confirm-delete-{{ $item->id }}" :show="false" maxWidth="sm">
                             <div class="p-6 bg-surface dark:bg-dark-surface text-text-primary dark:text-dark-text-primary">
                                 <h2 class="text-lg font-semibold">
@@ -49,7 +57,7 @@
                                         Batal
                                     </button>
     
-                                    <form method="POST" action="{{ route('prodi.destroy', $item->id) }}">
+                                    <form method="POST" action="{{ route('prodis.destroy', $item->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button
@@ -66,4 +74,5 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
 </section>

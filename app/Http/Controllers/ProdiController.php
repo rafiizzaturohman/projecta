@@ -23,7 +23,7 @@ class ProdiController extends Controller
         ]);
 
         $prodi = Prodi::create($validated);
-        return redirect()->route('prodi.index')->with('success', 'Prodi created successfully');
+        return redirect()->route('prodis.index')->with('success', 'Prodi created successfully');
     }
 
     // Tampilkan detail satu prodi
@@ -43,7 +43,14 @@ class ProdiController extends Controller
         ]);
 
         $prodi->update($validated);
-        return redirect()->route('prodi.index')->with('success', 'Prodi updated successfully');
+        return redirect()->route('prodis.index')->with('success', 'Prodi updated successfully');
+    }
+
+    public function edit($id)
+    {
+        $prodi = Prodi::findOrFail($id);
+
+        return view('prodi.edit', compact('prodi'));
     }
 
     // Soft delete prodi
@@ -51,6 +58,6 @@ class ProdiController extends Controller
     {
         $prodi = Prodi::findOrFail($id);
         $prodi->delete();
-        return redirect()->route('prodi.index')->with('success', 'Prodi deleted successfully');
+        return redirect()->route('prodis.index')->with('success', 'Prodi deleted successfully');
     }
 }
