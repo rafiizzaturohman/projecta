@@ -1,4 +1,4 @@
-<section class="px-4 py-6 sm:px-6 lg:px-8 max-w-7xl w-auto mx-auto">
+<section class="px-4 py-6 sm:px-6 lg:px-8 max-w-[1620px] w-auto mx-auto">
     <div class="overflow-x-auto rounded-lg shadow-soft bg-surface dark:bg-dark-surface">
         <table id="prodi-table"
             class="min-w-full text-base text-left divide-y divide-border dark:divide-dark-border text-text-primary dark:text-dark-text-primary">
