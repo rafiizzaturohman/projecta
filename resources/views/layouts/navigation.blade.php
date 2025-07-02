@@ -120,9 +120,17 @@
             <x-responsive-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
                 {{ __('Tugas') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                {{ __('Proyek') }}
+            </x-responsive-nav-link>
         @else
             <x-responsive-nav-link :href="route('userManagement.index')" :active="request()->routeIs('userManagement.index')">
                 {{ __('Manajemen Pengguna') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('prodis.index')" :active="request()->routeIs('prodis.index')">
+                {{ __('Program Studi') }}
             </x-responsive-nav-link>
         @endif
 
