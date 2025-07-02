@@ -1,29 +1,36 @@
 <section class="space-y-6">
-        <table id="projects-table">
+        <table id="projects-table" class="min-w-full text-base text-left divide-y divide-border dark:divide-dark-border text-text-primary dark:text-dark-text-primary">
+        <thead class="dark:bg-dark-muted text-md font-semibold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary">
             <thead>
                 <tr>
-                    <th>kd_prodi</th>
-                    <th>Deskripsi</th>
-                    <th>Deadline</th>
-                    <th>Kd_Prodi</th>
-                    <th>Kd_Matakuliah</th>
-                    <th>Mahasiswa_Nim</th>
+                    <x-table-header>Judul</x-table-header>
+                    <x-table-header>Deskripsi</x-table-header>
+                    <x-table-header>Deadline</x-table-header>
+                    <x-table-header>Kd Prodi</x-table-header>
+                    <x-table-header>Kd Matakuliah</x-table-header>
+                    <x-table-header>Mahasiswa Nim</x-table-header>
+                    <x-table-header>Aksi</x-table-header>
+              
                 </tr>
             </thead>
-            <tbody>
+    
+        <tbody class="divide-y divide-border dark:divide-dark-border">
+            <tbody
                 @foreach ($projects as $item)
                 @csrf
-                <tr>
-                    <td>{{ $item->judul }}</td>
-                    <td>{{ $item->deskripsi }}</td>
-                    <td>{{ $item->deadline }}</td>
-                    <td>{{ $item->kd_prodi}}</td>
-                    <td>{{ $item->kd_matakuliah}}</td>
-                    <td>{{ $item->mahasiswa_nim }}</td>
-                    <td class="px-6 py-4">
+                <tr class="hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                    <x-table-body>{{ $item->judul}}</x-table-body>
+                    <x-table-body>{{ $item->deskripsi }}</x-table-body>
+                    <x-table-body>{{ $item->deadline }}</x-table-body>
+                    <x-table-body>{{ $item->kd_prodi}}</x-table-body>
+                    <x-table-body>{{ $item->kd_matakuliah}}</x-table-body>
+                    <x-table-body>{{ $item->mahasiswa_nim }}</x-table-body>
+                    <x-table-body class="px-6 py-4">
                                 <div class="flex gap-2">
                                     <a href="{{ route('projects.edit', $item->id) }}"
-                                       class="text-blue-600 dark:text-blue-400 hover:underline">Edit</a>
+                                       class="text-blue-600 dark:text-blue-400 hover:underline">
+                                       Edit
+                                    </a>
     
                                     <button
                                         type="button"
@@ -34,7 +41,7 @@
                                         Hapus
                                     </button>
                                 </div>
-                            </td>
+                            </x-table-body>
                         </tr>
     
                         <!-- Modal -->

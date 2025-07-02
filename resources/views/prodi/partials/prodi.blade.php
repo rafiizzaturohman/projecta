@@ -2,17 +2,17 @@
         <table id="prodi-table">
             <thead>
                 <tr>
-                    <th>Kd_Prodi</th>
-                    <th>Nama</th>
+                    <x-table-header>Kd_Prodi</x-table-header>
+                    <x-table-header>Nama</x-table-header>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($prodi as $item)
                 @csrf
                 <tr>
-                    <td>{{ $item->kd_prodi }}</td>
-                    <td>{{ $item->nama }}</td>
-                    <td class="px-6 py-4">
+                    <x-table-body>{{ $item->kd_prodi }}</x-table-body>
+                    <x-table-body>{{ $item->nama }}</x-table-body>
+                    <x-table-body class="px-6 py-4">
                                 <div class="flex gap-2">
                                     <a href="{{ route('prodi.edit', $item->id) }}"
                                        class="text-blue-600 dark:text-blue-400 hover:underline">Edit</a>
@@ -26,7 +26,7 @@
                                         Hapus
                                     </button>
                                 </div>
-                            </td>
+                            </x-table-body>
                         </tr>
     
                         <!-- Modal -->
