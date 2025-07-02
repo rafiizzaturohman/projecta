@@ -17,7 +17,7 @@
                     <x-table-body>{{ $item->kd_prodi }}</x-table-body>
                     <x-table-body>{{ $item->nama }}</x-table-body>
                     <x-table-body>
-                        <div class="flex gap-2">
+                        <div class="flex gap-4">
                             <a href="{{ route('prodis.edit', $item->id) }}"
                                 class="text-blue-600 dark:text-blue-400 hover:underline">
                                 <i class="fa-solid fa-pen"></i>
