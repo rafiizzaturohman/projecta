@@ -1,6 +1,15 @@
-<section class="space-y-6">
-        <table id="projects-table" class="min-w-full text-base text-left divide-y divide-border dark:divide-dark-border text-text-primary dark:text-dark-text-primary">
-        <thead class="dark:bg-dark-muted text-md font-semibold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary">
+<section class="px-4 py-6 sm:px-6 lg:px-8 max-w-7xl w-auto mx-auto">
+    <div class="mb-4">
+        <a href="{{ route('tasks.create') }}"
+           class="inline-block bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-hover transition">
+            Tambah Data
+        </a>
+    </div>
+
+    <div class="overflow-x-auto rounded-lg shadow-soft bg-surface dark:bg-dark-surface">
+        <table id="table"
+            class="min-w-full text-base text-left divide-y divide-border dark:divide-dark-border text-text-primary dark:text-dark-text-primary">
+            <thead class="dark:bg-dark-muted text-md font-semibold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary">
             <thead>
                 <tr>
                     <x-table-header>Judul</x-table-header>
@@ -59,7 +68,7 @@
                                         Batal
                                     </button>
     
-                                    <form method="POST" action="{{ route('userManagement.destroy', $item->id) }}">
+                                    <form method="POST" action="{{ route('tasks.destroy', $item->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button
@@ -76,4 +85,5 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
 </section>
