@@ -1,4 +1,4 @@
-<section class="px-4 py-6 sm:px-6 lg:px-8 max-w-7xl w-auto mx-auto">
+<section class="px-4 py-6 sm:px-6 lg:px-8 max-w-[1620px] w-auto mx-auto">
     <div class="mb-4">
         <a href="{{ route('userManagement.create') }}"
            class="inline-block bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-hover transition">
@@ -29,9 +29,12 @@
                             </span>
                         </x-table-body>
                         <x-table-body>
-                            <div class="flex gap-2">
+                            <div class="flex gap-4">
                                 <a href="{{ route('userManagement.edit', $user->id) }}"
-                                    class="text-blue-600 dark:text-blue-400 hover:underline">Edit</a>
+                                    class="text-blue-600 dark:text-blue-400 hover:underline">
+                                <i class="fa-solid fa-pen"></i>
+                                    Edit
+                                </a>
     
                                 <button
                                     type="button"
@@ -39,6 +42,7 @@
                                     x-data
                                     x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $user->id }}')"
                                 >
+                                <i class="fa-solid fa-trash"></i>
                                     Hapus
                                 </button>
                             </div>

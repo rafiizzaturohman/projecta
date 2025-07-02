@@ -1,4 +1,4 @@
-<section class="px-4 py-6 sm:px-6 lg:px-8 max-w-7xl w-auto mx-auto">
+<section class="px-4 py-6 sm:px-6 lg:px-8 max-w-[1620px] w-auto mx-auto">
     <div class="overflow-x-auto rounded-lg shadow-soft bg-surface dark:bg-dark-surface">
         <table id="prodi-table"
             class="min-w-full text-base text-left divide-y divide-border dark:divide-dark-border text-text-primary dark:text-dark-text-primary">
@@ -15,10 +15,13 @@
                 <tr>
                     <x-table-body>{{ $item->kd_prodi }}</x-table-body>
                     <x-table-body>{{ $item->nama }}</x-table-body>
-                    <x-table-body class="px-6 py-4">
-                                <div class="flex gap-2">
-                                    <a href="{{ route('prodi.edit', $item->id) }}"
-                                       class="text-blue-600 dark:text-blue-400 hover:underline">Edit</a>
+                    <x-table-body>
+                        <div class="flex gap-4">
+                            <a href="{{ route('prodis.edit', $item->id) }}"
+                                class="text-blue-600 dark:text-blue-400 hover:underline">
+                                <i class="fa-solid fa-pen"></i>
+                                Edit
+                            </a>
     
                                     <button
                                         type="button"

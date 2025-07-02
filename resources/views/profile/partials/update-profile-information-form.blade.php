@@ -1,10 +1,10 @@
 <section x-data="{ role: '{{ old('role', $user->role) }}' }">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
+    <header class="mb-6">
+        <h2 class="text-xl font-semibold text-text-primary dark:text-dark-text-primary">
             {{ __('Profile Information') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-2 text-sm text-text-secondary dark:text-dark-text-secondary">
             {{ __("Update your profile information.") }}
         </p>
     </header>
@@ -35,7 +35,7 @@
             <!-- Role -->
             <div>
                 <x-input-label for="role" :value="__('Role')" />
-                <select id="role" name="role" x-model="role" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                <select id="role" name="role" x-model="role" class="w-full border border-border dark:border-dark-border bg-white dark:bg-dark-surface text-text-primary dark:text-dark-text-primary rounded-lg shadow-sm transition duration-200">
                     <option value="mahasiswa">Mahasiswa</option>
                     <option value="dosen">Dosen</option>
                     <option value="admin">Admin</option>
@@ -86,9 +86,12 @@
                 <x-primary-button>{{ __('Save') }}</x-primary-button>
 
                 @if (session('status') === 'profile-updated')
-                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600">
-                        {{ __('Saved.') }}
+                    <p x-data="{ show: true }"
+                        x-show="show"
+                        x-transition
+                        x-init="setTimeout(() => show = false, 2000)"
+                        class="text-sm font-medium text-success dark:text-success">
+                            {{ __('Saved.') }}
                     </p>
                 @endif
             </div>
