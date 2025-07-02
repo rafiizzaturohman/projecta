@@ -13,6 +13,11 @@ class TaskController extends Controller
         $tasks = Task::with(['project', 'user'])->get();
         return view('tasks.index', compact('tasks'));
     }
+    
+    public function create()
+    {
+       return view('tasks.create');
+    }
 
     // Menyimpan task baru
     public function store(Request $request)
@@ -31,9 +36,11 @@ class TaskController extends Controller
     }
 
     // Menampilkan detail satu task
-    public function create()
+    public function edit($id)
     {
-       return view('tasks.create');
+        $task = Task::findOrFail($id);
+
+       return view('tasks.edit');
     }
 
     // Memperbarui task

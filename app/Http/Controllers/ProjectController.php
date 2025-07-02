@@ -53,7 +53,14 @@ class ProjectController extends Controller
         ]);
 
         $project->update($validated);
-        return rediret('projects')->with('success', 'Project updated successfully');
+        return redirect('projects')->with('success', 'Project updated successfully');
+    }
+
+    public function edit($id)
+    {
+        $project = Project::findOrFail($id);
+
+       return view('projects.edit', compact('project'));
     }
 
     // Menghapus project

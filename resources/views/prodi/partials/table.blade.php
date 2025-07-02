@@ -1,13 +1,16 @@
-<section class="space-y-6">
-        <table id="prodi-table">
-            <thead>
+<section class="px-4 py-6 sm:px-6 lg:px-8 max-w-7xl w-auto mx-auto">
+    <div class="overflow-x-auto rounded-lg shadow-soft bg-surface dark:bg-dark-surface">
+        <table id="prodi-table"
+            class="min-w-full text-base text-left divide-y divide-border dark:divide-dark-border text-text-primary dark:text-dark-text-primary">
+            <thead class="dark:bg-dark-muted text-md font-semibold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary">
                 <tr>
                     <x-table-header>Kd_Prodi</x-table-header>
                     <x-table-header>Nama</x-table-header>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ($prodi as $item)
+            
+            <tbody class="divide-y divide-border dark:divide-dark-border">
+                @foreach ($prodis as $item)
                 @csrf
                 <tr>
                     <x-table-body>{{ $item->kd_prodi }}</x-table-body>
@@ -29,7 +32,7 @@
                             </x-table-body>
                         </tr>
     
-                        <!-- Modal -->
+                    <!-- Modal -->
                         <x-modal name="confirm-delete-{{ $item->id }}" :show="false" maxWidth="sm">
                             <div class="p-6 bg-surface dark:bg-dark-surface text-text-primary dark:text-dark-text-primary">
                                 <h2 class="text-lg font-semibold">
@@ -49,7 +52,7 @@
                                         Batal
                                     </button>
     
-                                    <form method="POST" action="{{ route('prodi.destroy', $item->id) }}">
+                                    <form method="POST" action="{{ route('prodis.destroy', $item->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button
@@ -66,4 +69,5 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
 </section>

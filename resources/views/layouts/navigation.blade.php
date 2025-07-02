@@ -27,14 +27,18 @@
                         </x-nav-link>
 
                         <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
-                            {{ __('Project') }}
+                            {{ __('Proyek') }}
                         </x-nav-link>
                     @else
                         <x-nav-link :href="route('userManagement.index')" :active="request()->routeIs('userManagement.index')">
                             {{ __('Manajemen Pengguna') }}
                         </x-nav-link>
 
+<<<<<<< HEAD
                         <x-nav-link :href="route('userManagement.index')" :active="request()->routeIs('userManagement.index')">
+=======
+                        <x-nav-link :href="route('prodis.index')" :active="request()->routeIs('prodis.index')">
+>>>>>>> 9e3bd6221fc05790711a7c388a85bdafd8dbdb3f
                             {{ __('Program Studi') }}
                         </x-nav-link>
                     @endif
