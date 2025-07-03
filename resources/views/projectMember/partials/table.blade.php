@@ -1,23 +1,33 @@
 <section class="px-4 py-6 sm:px-6 lg:px-8 max-w-[1620px] w-auto mx-auto">
+    <div class="mb-4">
+        <a href="{{ route('project_members.create') }}"
+           class="inline-block bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-hover transition">
+            Tambah Data
+        </a>
+    </div>
+
     <div class="overflow-x-auto rounded-lg shadow-soft bg-surface dark:bg-dark-surface">
         <table id="prodi-table"
             class="min-w-full text-base text-left divide-y divide-border dark:divide-dark-border text-text-primary dark:text-dark-text-primary">
             <thead class="dark:bg-dark-muted text-md font-semibold uppercase tracking-wider text-text-secondary dark:text-dark-text-secondary">
                 <tr>
-                    <x-table-header>Kode Program Studi</x-table-header>
+                    <x-table-header>Proyek</x-table-header>
                     <x-table-header>Nama</x-table-header>
+                    <x-table-header>Role</x-table-header>
+                    <x-table-header>Aksi</x-table-header>
                 </tr>
             </thead>
             
             <tbody class="divide-y divide-border dark:divide-dark-border">
-                @foreach ($prodis as $item)
+                @foreach ($members as $item)
                 @csrf
                 <tr>
-                    <x-table-body>{{ $item->kd_prodi }}</x-table-body>
-                    <x-table-body>{{ $item->nama }}</x-table-body>
+                    <x-table-body>{{ $item->project->judul ?? '-' }}</x-table-body>
+                    <x-table-body>{{ $item->user->nama ?? '-' }}</x-table-body>
+                    <x-table-body>{{ ucfirst($item->role) ?? '-' }}</x-table-body>
                     <x-table-body>
                         <div class="flex gap-4">
-                            <a href="{{ route('prodis.edit', $item->id) }}"
+                            <a href="{{ route('project_members.edit', $item->id) }}"
                                 class="text-blue-600 dark:text-blue-400 hover:underline">
                                 <i class="fa-solid fa-pen"></i>
                                 Edit
@@ -42,7 +52,7 @@
                                 </h2>
     
                                 <p class="mt-2 text-sm text-text-secondary dark:text-dark-text-secondary">
-                                    Apakah Anda yakin ingin menghapus tugas <strong>{{ $item->judul }}</strong>? Tindakan ini tidak dapat dibatalkan.
+                                    Apakah Anda yakin ingin menghapus anggota project <strong>{{ $item->judul }}</strong>? Tindakan ini tidak dapat dibatalkan.
                                 </p>
     
                                 <div class="mt-6 flex justify-end gap-4">
@@ -54,7 +64,7 @@
                                         Batal
                                     </button>
     
-                                    <form method="POST" action="{{ route('prodis.destroy', $item->id) }}">
+                                    <form method="POST" action="{{ route('project_members.destroy', $item->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button

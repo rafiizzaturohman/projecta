@@ -29,6 +29,10 @@
                         <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                             {{ __('Proyek') }}
                         </x-nav-link>
+
+                        <x-nav-link :href="route('project_members.index')" :active="request()->routeIs('project_members.index')">
+                            {{ __('Proyek Member') }}
+                        </x-nav-link>
                     @else
                         <x-nav-link :href="route('userManagement.index')" :active="request()->routeIs('userManagement.index')">
                             {{ __('Manajemen Pengguna') }}
@@ -119,6 +123,10 @@
 
             <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                 {{ __('Proyek') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('project_members.index')" :active="request()->routeIs('project_members.index')">
+                {{ __('Proyek Member') }}
             </x-responsive-nav-link>
         @else
             <x-responsive-nav-link :href="route('userManagement.index')" :active="request()->routeIs('userManagement.index')">
