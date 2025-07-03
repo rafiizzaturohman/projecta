@@ -20,6 +20,11 @@
     
             <tbody class="divide-y divide-border dark:divide-dark-border">
                 @foreach ($users as $user)
+                @if ($user->id === auth()->id())
+                    @continue
+                @endif
+
+
                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-800 transition">
                         <x-table-body>{{ $user->nama }}</x-table-body>
                         <x-table-body>{{ $user->email }}</x-table-body>
@@ -32,18 +37,14 @@
                             <div class="flex gap-4">
                                 <a href="{{ route('userManagement.edit', $user->id) }}"
                                     class="text-blue-600 dark:text-blue-400 hover:underline">
-                                <i class="fa-solid fa-pen"></i>
-                                    Edit
+                                    <i class="fa-solid fa-pen"></i> Edit
                                 </a>
-    
-                                <button
-                                    type="button"
+
+                                <button type="button"
                                     class="text-danger hover:underline"
                                     x-data
-                                    x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $user->id }}')"
-                                >
-                                <i class="fa-solid fa-trash"></i>
-                                    Hapus
+                                    x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $user->id }}')">
+                                    <i class="fa-solid fa-trash"></i> Hapus
                                 </button>
                             </div>
                         </x-table-body>
