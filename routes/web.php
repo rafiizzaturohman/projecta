@@ -27,6 +27,8 @@ Route::middleware([
     'verified',
     RoleMiddleware::class . ':admin'
 ])->group(function () {
+    Route::get('userManagement/search', [UserController::class, 'search'])->name('userManagement.search');
+
     Route::resource('userManagement', UserController::class);
     Route::resource('prodis', ProdiController::class);
     Route::resource('matakuliahs', MatakuliahController::class);

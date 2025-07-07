@@ -16,6 +16,21 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->get('query');
+
+        $users = User::with('prodi')
+            ->where('nama', 'like', "%{$keyword}%")
+            ->orWhere('email', 'like', "%{$keyword}%")
+            ->orWhere('role', 'like', "%{$keyword}%")
+            ->get();
+
+        return response()->json([
+        'html' => view('users.partials.table-body', compact('users'))->render(),
+    ]);
+    }
+
     public function create()
     {
         $prodis = Prodi::all();
