@@ -6,14 +6,16 @@
                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-800 transition">
                         <x-table-body>
                             @if ($user->role === 'dosen')
-                            {{ $user->nidn }}
+                                {{ $user->nidn }}
                             @elseif ($user->role === 'mahasiswa')
-                            {{ $user->nim }}
+                                {{ $user->nim }}
                             @elseif ($user->role === 'admin')                            
-                            {{ $user->nip }}
+                                {{ $user->nip }}
+                            @else
+                                -                                
                             @endif
                         </x-table-body>
-                        <x-table-body>{{ $user->nama }}</x-table-body>
+                        <x-table-body>{{ ucfirst($user->nama) }}</x-table-body>
                         <x-table-body>{{ $user->email }}</x-table-body>
                         <x-table-body>
                             <span class="inline-block px-2 py-0.5 text-xs rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100">

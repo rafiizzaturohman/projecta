@@ -22,6 +22,9 @@ class UserController extends Controller
 
         $users = User::with('prodi')
             ->where('nama', 'like', "%{$keyword}%")
+            ->orWhere('nim', 'like', "%{$keyword}%")
+            ->orWhere('nidn', 'like', "%{$keyword}%")
+            ->orWhere('nip', 'like', "%{$keyword}%")
             ->orWhere('email', 'like', "%{$keyword}%")
             ->orWhere('role', 'like', "%{$keyword}%")
             ->get();
