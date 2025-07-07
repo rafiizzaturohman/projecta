@@ -3,8 +3,16 @@
                     @continue
                 @endif
 
-
                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                        <x-table-body>
+                            @if ($user->role === 'dosen')
+                            {{ $user->nidn }}
+                            @elseif ($user->role === 'mahasiswa')
+                            {{ $user->nim }}
+                            @elseif ($user->role === 'admin')                            
+                            {{ $user->nip }}
+                            @endif
+                        </x-table-body>
                         <x-table-body>{{ $user->nama }}</x-table-body>
                         <x-table-body>{{ $user->email }}</x-table-body>
                         <x-table-body>
