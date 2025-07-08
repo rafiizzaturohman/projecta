@@ -30,8 +30,8 @@ class UserController extends Controller
             ->get();
 
         return response()->json([
-        'html' => view('users.partials.table-body', compact('users'))->render(),
-    ]);
+            'html' => view('users.partials.table-body', compact('users'))->render(),
+        ]);
     }
 
     public function create()
