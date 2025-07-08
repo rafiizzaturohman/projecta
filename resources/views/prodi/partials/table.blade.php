@@ -20,16 +20,16 @@
                             <a href="{{ route('prodis.edit', $item->id) }}"
                                 class="text-blue-600 dark:text-blue-400 hover:underline">
                                 <i class="fa-solid fa-pen"></i>
-                                Edit
+                                <!-- Edit -->
                             </a>
     
                                     <button
                                         type="button"
                                         class="text-danger hover:underline"
                                         x-data
-                                        x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $item->id }}')"
-                                    >
-                                        Hapus
+                                        x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $item->id }}')">
+                                        <i class="fa-solid fa-trash"></i>
+                                        <!-- Hapus -->
                                     </button>
                                 </div>
                             </x-table-body>
