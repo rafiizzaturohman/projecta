@@ -13,9 +13,9 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             // Dosen
             [
-                'nama' => 'Dosen Satu',
+                'nama' => 'Syifa Shintawati, S. Kom',
                 'email' => 'dosen@if.ac.id',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('12341234'),
                 'nim' => null,
                 'nidn' => '9876543210',
                 'nip' => null,
@@ -26,9 +26,9 @@ class UserSeeder extends Seeder
             ],
             // Mahasiswa A
             [
-                'nama' => 'Mahasiswa A',
+                'nama' => 'Alyaa Putri Maharani',
                 'email' => 'mahasiswaa@if.ac.id',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('12341234'),
                 'nim' => '25110101',
                 'nidn' => null,
                 'nip' => null,
@@ -39,9 +39,9 @@ class UserSeeder extends Seeder
             ],
             // Mahasiswa B
             [
-                'nama' => 'Mahasiswa B',
+                'nama' => 'Rafi Izzaturohman',
                 'email' => 'mahasiswab@if.ac.id',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('12341234'),
                 'nim' => '25110102',
                 'nidn' => null,
                 'nip' => null,

@@ -29,11 +29,18 @@
                         <x-table-body>{{ $item->deadline }}</x-table-body>
                         <x-table-body>{{ $item->user_nim }}</x-table-body>
                         <x-table-body>{{ $item->project->judul }}</x-table-body>
-                        <x-table-body>{{ $item->status }}</x-table-body>
+                        @if ($item->status === "belum")
+                            <x-table-body class="text-center bg-red-600 text-white">{{ ucfirst($item->status) }}</x-table-body>
+                        @elseif ($item->status === "proses")
+                            <x-table-body class="text-center bg-yellow-600 text-white">{{ ucfirst($item->status) }}</x-table-body>
+                        @else
+                            <x-table-body class="text-center bg-green-600 text-white">{{ ucfirst($item->status) }}</x-table-body>
+                        @endif
                         <x-table-body class="px-6 py-4">
                             <div class="flex gap-2">
                                 <a href="{{ route('tasks.edit', $item->id) }}"
                                    class="text-blue-600 dark:text-blue-400 hover:underline">
+                                    <i class="fa-solid fa-pen"></i>
                                     Edit
                                 </a>
 
@@ -42,6 +49,7 @@
                                     class="text-danger hover:underline"
                                     x-data
                                     x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $item->id }}')">
+                                    <i class="fa-solid fa-trash"></i>
                                     Hapus
                                 </button>
                             </div>
