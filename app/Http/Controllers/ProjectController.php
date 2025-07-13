@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Matakuliah;
+use App\Models\Prodi;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -27,14 +29,17 @@ class ProjectController extends Controller
             'status' => 'in:belum,proses,selesai',
         ]);
 
-        $project = Project::create($validated);
+        Project::create($validated);
         return redirect('projects')->with('success', 'Project created successfully');
     }
 
     // Menampilkan detail satu project
     public function create()
     {
-        return view('projects.create');
+        $prodis = Prodi::All();
+        $matakuliah = Matakuliah::All();
+
+        return view('projects.create', compact('prodis', 'matakuliah'));
     }
 
     // Memperbarui data project
@@ -53,7 +58,16 @@ class ProjectController extends Controller
         ]);
 
         $project->update($validated);
-        return rediret('projects')->with('success', 'Project updated successfully');
+        return redirect('projects')->with('success', 'Project updated successfully');
+    }
+
+    public function edit($id)
+    {
+        $project = Project::findOrFail($id);
+        $prodis = Prodi::All();
+        $matakuliah = Matakuliah::All();
+
+        return view('projects.edit', compact('project', 'prodis', 'matakuliah'));
     }
 
     // Menghapus project

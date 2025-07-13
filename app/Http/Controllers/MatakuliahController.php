@@ -26,7 +26,7 @@ class MatakuliahController extends Controller
         ]);
 
         $matakuliah = Matakuliah::create($validated);
-        return redirect('matakuliah');
+        return redirect()->route('matakuliahs.index');
     }
 
     // Menampilkan detail satu matakuliah
@@ -50,6 +50,13 @@ class MatakuliahController extends Controller
 
         $matakuliah->update($validated);
         return redirect('matakuliah');
+    }
+
+    public function edit($id)
+    {
+        $matakuliah = Matakuliah::findOrFail($id);
+        $dosen= user::where('role', 'dosen')->get();
+        return view('matakuliah.edit', compact('matakuliah', 'dosen'));
     }
 
     // Menghapus matakuliah

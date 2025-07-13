@@ -4,27 +4,28 @@
             Edit Data User
         </h2>
 
-        <form method="POST" action="{{ route('prodi.update', $user->id) }}">
+        <form method="POST" action="{{ route('prodis.update', $prodi->id) }}">
             @csrf
             @method('PUT')
 
             <div class="mb-4">
                 <x-input-label for="kd_prodi" value="Kd_Prodi" />
-                <x-text-input id="kd_prodi" name="kd_prodi" type="text" :value="old('kd_prodi', $user->kd_prodi)" required />
+                <x-text-input id="kd_prodi" name="kd_prodi" type="text" :value="old('kd_prodi', $prodi->kd_prodi)" required />
                 <x-input-error :messages="$errors->get('kd_prodi')" class="mt-1" />
             </div>
 
             <div class="mb-4">
                 <x-input-label for="nama" value="Nama" />
-                <x-text-input id="nama" name="nama" type="nama" :value="old('nama', $user->nama)" required />
+                <x-text-input id="nama" name="nama" type="text" :value="old('nama', $prodi->nama)" required />
                 <x-input-error :messages="$errors->get('nama')" class="mt-1" />
             </div>
             
             {{-- Tombol --}}
             <div class="mt-6 flex justify-end gap-2">
-                <a href="{{ route('prodi.index') }}">
+                <a href="{{ route('prodis.index') }}">
                     <x-secondary-button>Kembali</x-secondary-button>
                 </a>
+
                 <x-primary-button>Simpan</x-primary-button>
             </div>
         </form>
