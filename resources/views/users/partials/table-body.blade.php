@@ -12,7 +12,7 @@
             @elseif ($user->role === 'admin')                            
                 {{ $user->nip }}
             @else
-                -                                
+                -                     
             @endif
         </x-table-body>
         <x-table-body>{{ ucfirst($user->nama) }}</x-table-body>

@@ -24,13 +24,19 @@ Route::get('/dashboard', function () {
 // Group khusus ADMIN
 Route::middleware([
     'auth',
-    'verified',
     RoleMiddleware::class . ':admin'
 ])->group(function () {
     Route::get('userManagement/search', [UserController::class, 'search'])->name('userManagement.search');
 
     Route::resource('userManagement', UserController::class);
     Route::resource('prodis', ProdiController::class);
+    Route::resource('matakuliahs', MatakuliahController::class);
+});
+
+Route::middleware([
+    'auth',
+    RoleMiddleware::class . ':dosen'
+])->group(function () {
     Route::resource('matakuliahs', MatakuliahController::class);
 });
 
