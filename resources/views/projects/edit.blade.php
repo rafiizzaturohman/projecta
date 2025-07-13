@@ -82,9 +82,9 @@
 
             {{-- Tombol --}}
             <div class="mt-6 flex justify-end gap-2">
-                <a href="{{ route('projects.index') }}">
-                    <x-secondary-button>Kembali</x-secondary-button>
-                </a>
+                {{-- <a href="{{ route('projects.index') }}"> --}}
+                    <x-secondary-button :href="{{ route('projects.index') }}">Kembali</x-secondary-button>
+                {{-- </a> --}}
                 <x-primary-button>Perbarui</x-primary-button>
             </div>
         </form>

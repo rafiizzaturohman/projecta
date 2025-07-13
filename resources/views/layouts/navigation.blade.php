@@ -21,13 +21,33 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @if ($role !== 'admin')
+                    @if ($role === 'mahasiswa')
                         <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
                             {{ __('Tugas') }}
                         </x-nav-link>
 
                         <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                             {{ __('Proyek') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('project_members.index')" :active="request()->routeIs('project_members.index')">
+                            {{ __('Proyek Member') }}
+                        </x-nav-link>
+                    @elseif ($role === 'dosen')
+                        <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
+                            {{ __('Tugas') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                            {{ __('Proyek') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('project_members.index')" :active="request()->routeIs('project_members.index')">
+                            {{ __('Proyek Member') }}
+                        </x-nav-link>
+                        
+                        <x-nav-link :href="route('matakuliahs.index')" :active="request()->routeIs('matakuliahs.index')">
+                            {{ __('Mata Kuliah') }}
                         </x-nav-link>
                     @else
                         <x-nav-link :href="route('userManagement.index')" :active="request()->routeIs('userManagement.index')">
@@ -36,6 +56,10 @@
 
                         <x-nav-link :href="route('prodis.index')" :active="request()->routeIs('prodis.index')">
                             {{ __('Program Studi') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('matakuliahs.index')" :active="request()->routeIs('matakuliahs.index')">
+                            {{ __('Mata Kuliah') }}
                         </x-nav-link>
                     @endif
                 </div>
@@ -73,7 +97,7 @@
                     </button>
 
                     <div x-show="open" x-transition class="absolute right-0 mt-2 w-48 rounded-md shadow-lg
-                                                           bg-surface dark:bg-dark-surface border border-border dark:border-dark-border space-y-1 p-1 z-50">
+                                bg-surface dark:bg-dark-surface border border-border dark:border-dark-border space-y-1 p-1 z-50">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
@@ -112,13 +136,37 @@
             {{ __('Dashboard') }}
         </x-responsive-nav-link>
 
-        @if ($role !== 'admin')
+        @if ($role === 'mahasiswa')
             <x-responsive-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
                 {{ __('Tugas') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                 {{ __('Proyek') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('project_members.index')" :active="request()->routeIs('project_members.index')">
+                {{ __('Proyek Member') }}
+            </x-responsive-nav-link>
+                        
+            <x-responsive-nav-link :href="route('matakuliahs.index')" :active="request()->routeIs('matakuliahs.index')">
+                {{ __('Mata Kuliah') }}
+            </x-responsive-nav-link>
+        @elseif ($role === 'dosen')
+            <x-responsive-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.index')">
+                {{ __('Tugas') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                {{ __('Proyek') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('project_members.index')" :active="request()->routeIs('project_members.index')">
+                {{ __('Proyek Member') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('matakuliahs.index')" :active="request()->routeIs('matakuliahs.index')">
+                {{ __('Mata Kuliah') }}
             </x-responsive-nav-link>
         @else
             <x-responsive-nav-link :href="route('userManagement.index')" :active="request()->routeIs('userManagement.index')">

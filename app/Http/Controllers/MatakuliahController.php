@@ -26,7 +26,7 @@ class MatakuliahController extends Controller
         ]);
 
         $matakuliah = Matakuliah::create($validated);
-        return redirect('matakuliah');
+        return redirect()->route('matakuliahs.index');
     }
 
     // Menampilkan detail satu matakuliah

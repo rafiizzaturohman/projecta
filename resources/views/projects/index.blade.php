@@ -16,7 +16,7 @@
             x-show="show" 
             x-transition 
             x-init="setTimeout(() => show = false, 3000)"
-            class="mt-4 px-4 py-3 rounded-xl bg-success text-white text-sm shadow-md"
+            class="mt-4 px-4 py-3 text-white text-base text-center"
         >
             {{ session('success') }}
         </div>
