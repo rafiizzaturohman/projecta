@@ -8,43 +8,37 @@
             @csrf
             @method('PUT')
 
-            <div class="mb-4">
-                <x-input-label for="judul" value="Judul" />
-                <x-text-input id="judul" name="judul" type="text" :value="old('judul', $user->judul)" required />
-                <x-input-error :messages="$errors->get('judul')" class="mt-1" />
-            </div>
-
-            <div class="mb-4">
-                <x-input-label for="deskripsi" value="Deskripsi" />
-                <x-text-input id="deskripsi" name="deskripsi" type="deskripsi" :value="old('deskripsi', $user->deskripsi)" required />
-                <x-input-error :messages="$errors->get('deskripsi')" class="mt-1" />
-            </div>
-            
-            <div class="mb-4">
-                <x-input-label for="kd_prodi" value="Kd_Prodi" />
-                <x-text-input id="kd_prodi" name="kd_prodi" type="kd_prodi" :value="old('kd_prodi', $user->kd_prodi)" required />
-                <x-input-error :messages="$errors->get('kd_prodi')" class="mt-1" />
-            </div>
-            
-            <div class="mb-4">
-                <x-input-label for="kd_matakuliah" value="Kd_Matakuliah" />
-                <x-text-input id="kd_matakuliah" name="kd_matakuliah" type="kd_matakuliah" :value="old('kd_matakuliah', $user->kd_matakuliah)" required />
-                <x-input-error :messages="$errors->get('kd_matakuliah')" class="mt-1" />
-            </div>
-            
-            <div class="mb-4">
-                <x-input-label for="mahasiswa_nim" value="Mahasiswa_Nim" />
-                <x-text-input id="mahasiswa_nim" name="mahasiswa_nim" type="mahasiswa_nim" :value="old('mahasiswa_nim', $user->mahasiswa_nim)" required />
-                <x-input-error :messages="$errors->get('mahasiswa_nim')" class="mt-1" />
-            </div>
-
-            {{-- Tombol --}}
-            <div class="mt-6 flex justify-end gap-2">
-                <a href="{{ route('projects.index') }}">
-                    <x-secondary-button>Kembali</x-secondary-button>
-                </a>
-                <x-primary-button>Simpan</x-primary-button>
-            </div>
+            <div class="bg-surface-50 dark:bg-dark-surface-50 p-6 rounded-xl border border-border dark:border-dark-border">
+    <!-- Header Dinamis -->
+    <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-6" x-text="isEditMode ? 'Edit Proyek' : 'Buat Proyek Baru'"></h2>
+    
+    <form class="space-y-5" x-data="{
+        isEditMode: false,
+        projectId: null,
+        projectName: '',
+        projectDescription: '',
+        supervisor: '',
+        deadline: '',
+        
+        // Untuk mode edit
+        editProject(project) {
+            this.isEditMode = true;
+            this.projectId = project.id;
+            this.projectName = project.name;
+            this.projectDescription = project.description;
+            this.supervisor = project.supervisor_id;
+            this.deadline = project.deadline;
+        },
+        
+        // Reset form
+        resetForm() {
+            this.isEditMode = false;
+            this.projectId = null;
+            this.projectName = '';
+            this.projectDescription = '';
+            this.supervisor = '';
+            this.deadline = '';
+        },
         </form>
     </div>
 </x-app-layout>
