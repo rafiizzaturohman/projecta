@@ -13,6 +13,8 @@
                 <tr>
                     <x-table-header>Kode Mata Kuliah</x-table-header>
                     <x-table-header>Nama</x-table-header>
+                    <x-table-header>Semester</x-table-header>
+                    <x-table-header>SKS</x-table-header>
                     <x-table-header>Dosen Pengampu</x-table-header>
                     <x-table-header>Aksi</x-table-header>
                 </tr>
