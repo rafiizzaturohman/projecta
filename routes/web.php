@@ -30,12 +30,11 @@ Route::middleware([
 
     Route::resource('userManagement', UserController::class);
     Route::resource('prodis', ProdiController::class);
-    Route::resource('matakuliahs', MatakuliahController::class);
 });
 
 Route::middleware([
     'auth',
-    RoleMiddleware::class . ':dosen'
+    RoleMiddleware::class . ':dosen,admin'
 ])->group(function () {
     Route::resource('matakuliahs', MatakuliahController::class);
 });
