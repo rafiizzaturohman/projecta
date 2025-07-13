@@ -52,6 +52,13 @@ class MatakuliahController extends Controller
         return redirect('matakuliah');
     }
 
+    public function edit($id)
+    {
+        $matakuliah = Matakuliah::findOrFail($id);
+        $dosen= user::where('role', 'dosen')->get();
+        return view('matakuliah.edit', compact('matakuliah', 'dosen'));
+    }
+
     // Menghapus matakuliah
     public function destroy($id)
     {

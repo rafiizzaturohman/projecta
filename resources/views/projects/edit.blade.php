@@ -12,6 +12,39 @@
             @csrf
             @method('PUT')
 
+<<<<<<< HEAD
+            <div class="bg-surface-50 dark:bg-dark-surface-50 p-6 rounded-xl border border-border dark:border-dark-border">
+    <!-- Header Dinamis -->
+    <h2 class="text-xl font-bold text-text-primary dark:text-dark-text-primary mb-6" x-text="isEditMode ? 'Edit Proyek' : 'Buat Proyek Baru'"></h2>
+    
+    <form class="space-y-5" x-data="{
+        isEditMode: false,
+        projectId: null,
+        projectName: '',
+        projectDescription: '',
+        supervisor: '',
+        deadline: '',
+        
+        // Untuk mode edit
+        editProject(project) {
+            this.isEditMode = true;
+            this.projectId = project.id;
+            this.projectName = project.name;
+            this.projectDescription = project.description;
+            this.supervisor = project.supervisor_id;
+            this.deadline = project.deadline;
+        },
+        
+        // Reset form
+        resetForm() {
+            this.isEditMode = false;
+            this.projectId = null;
+            this.projectName = '';
+            this.projectDescription = '';
+            this.supervisor = '';
+            this.deadline = '';
+        },
+=======
             {{-- Judul --}}
             <div class="mb-4">
                 <x-input-label for="judul" value="Judul" />
@@ -87,6 +120,7 @@
                 {{-- </a> --}}
                 <x-primary-button>Perbarui</x-primary-button>
             </div>
+>>>>>>> 0807e120f0e75928c4e9dbc42e916ff5fc26fcb3
         </form>
     </div>
 </x-app-layout>

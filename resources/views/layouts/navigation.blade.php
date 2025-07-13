@@ -54,7 +54,7 @@
                             {{ __('Manajemen Pengguna') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('prodis.index')" :active="request()->routeIs('prodis.index')">
+                        <x-nav-link :href="route('prodi.index')" :active="request()->routeIs('prodi.index')">
                             {{ __('Program Studi') }}
                         </x-nav-link>
 
