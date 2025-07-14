@@ -191,15 +191,15 @@
                                                     --}}
 
                                                     @if ($task->status === 'belum')
-                                                        <span class="px-2 py-3 rounded text-sm bg-gray-200 text-gray-700">
+                                                        <span class="px-2 py-3 rounded-xl text-sm bg-gray-200 text-gray-700">
                                                             {{ ucfirst($task->status) }}
                                                         </span>
                                                     @elseif ($task->status === 'proses')
-                                                        <span class="px-2 py-3 rounded text-sm bg-warning/20 text-warning">
+                                                        <span class="px-2 py-3 rounded-xl text-sm bg-warning/20 text-warning">
                                                             {{ ucfirst($task->status) }}
                                                         </span>
                                                     @else
-                                                        <span class="px-2 py-3 rounded text-sm bg-success/20 text-success">
+                                                        <span class="px-2 py-3 rounded-xl text-sm bg-success/20 text-success">
                                                             {{ ucfirst($task->status) }}
                                                         </span>
                                                     @endif

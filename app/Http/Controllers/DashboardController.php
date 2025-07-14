@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Models\Task;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -13,20 +11,17 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        $projects = Project::with([
-            'tasks' => function ($query) use ($user) {
-                $query->where('user_nim', $user->nim); // atau user_id tergantung field foreign key
-            }
-        ])
-        ->withCount([
-            'tasks as total_tasks' => function ($q) use ($user) {
-                $q->where('user_nim', $user->nim);
+        // Ambil semua project + total task dan task selesai untuk progress
+        $projects = Project::withCount([
+            'tasks as total_tasks',
+            'tasks as completed_tasks' => function ($query) {
+                $query->where('status', 'selesai');
             },
-            'tasks as completed_tasks' => function ($q) use ($user) {
-                $q->where('user_nim', $user->nim)
-                ->where('status', 'selesai');
-            }
         ])
+        // Ambil 1 task milik user per project
+        ->with(['tasks' => function ($query) use ($user) {
+            $query->where('user_nim', $user->nim)->limit(1);
+        }])
         ->get();
 
         return view('dashboard', compact('projects'));
