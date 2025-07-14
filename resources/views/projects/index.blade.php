@@ -1,10 +1,6 @@
 <x-app-layout>
     {{-- Tabel User --}}
     @include('projects.partials.table')
-<<<<<<< HEAD
-    
-    
-=======
  
  {{-- Flash Success Message --}}
     @if(session('success'))
@@ -18,5 +14,4 @@
             {{ session('success') }}
         </div>
     @endif
->>>>>>> 1e879df33aa4114c790f81c2fa3cc7a97a3d5921
 </x-app-layout>

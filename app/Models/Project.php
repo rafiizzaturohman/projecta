@@ -14,6 +14,30 @@ class Project extends Model
     protected $guarded = ['id'];
 
     /**
+    * Function untuk otomatis update status pada project ketika ada perubahan status pada tasks atau tugas yang 
+    * memiliki relasi ke project tersebut
+    */
+    public function updateStatus()
+    {
+        $total = $this->tasks()->count();
+        $selesai = $this->tasks()->where('status', 'selesai')->count();
+        $proses = $this->tasks()->where('status', 'proses')->count();
+
+        if ($total === 0) {
+            $this->status = 'belum';
+        } elseif ($selesai === $total) {
+            $this->status = 'selesai';
+        } elseif ($proses > 0) {
+            $this->status = 'proses';
+        } else {
+            $this->status = 'belum';
+        }
+
+        $this->save();
+    }
+
+
+    /**
      * Relasi ke Prodi berdasarkan kd_prodi
      */
     public function prodi()
@@ -35,5 +59,10 @@ class Project extends Model
     public function mahasiswa()
     {
         return $this->belongsTo(User::class, 'mahasiswa_nim', 'nim');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 }
