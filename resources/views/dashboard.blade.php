@@ -14,7 +14,7 @@
                         <ul class="list-disc list-inside mt-3 text-text-secondary dark:text-dark-text-secondary">
                             <li>Manage Users</li>
                             <li>View All Projects</li>
-                            <li>System Settings</li>
+                            <li>System Settings</li>    
                         </ul>
 
                     @elseif ($role === 'dosen')
@@ -108,20 +108,20 @@
                         <div x-data="{ activeSection: 'projects' }" class="space-y-6">
                             <!-- Navigation -->
                             <div class="flex space-x-4 border-b border-border dark:border-dark-border">
-                                <button @click="activeSection = 'projects'" 
-                                        :class="{ 'border-b-2 border-primary text-primary': activeSection === 'projects' }"
-                                        class="pb-3 px-1 font-medium">
-                                    Proyek Saya
-                                </button>
                                 <button @click="activeSection = 'tasks'" 
                                         :class="{ 'border-b-2 border-primary text-primary': activeSection === 'tasks' }"
                                         class="pb-3 px-1 font-medium">
                                     Tugas Saya
                                 </button>
+                                 <button @click="activeSection = 'projects'" 
+                                        :class="{ 'border-b-2 border-primary text-primary': activeSection === 'projects' }"
+                                        class="pb-3 px-1 font-medium">
+                                    Proyek Saya
+                                </button>
                                 <button @click="activeSection = 'invite'" 
                                         :class="{ 'border-b-2 border-primary text-primary': activeSection === 'invite' }"
                                         class="pb-3 px-1 font-medium">
-                                    Kolaborasi
+                                    Proyek Member
                                 </button>
                             </div>
 

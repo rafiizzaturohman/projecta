@@ -40,8 +40,13 @@
                             <div class="flex gap-2">
                                 <a href="{{ route('tasks.edit', $item->id) }}"
                                    class="text-blue-600 dark:text-blue-400 hover:underline">
+<<<<<<< HEAD
                                    <i class="fa-solid fa-pen"></i>
+                                    <!-- Edit -->
+=======
+                                    <i class="fa-solid fa-pen"></i>
                                     Edit
+>>>>>>> 67f34c1281eccc821e05978b47e8c8c32ab198bc
                                 </a>
 
                                 <button
@@ -50,7 +55,11 @@
                                     x-data
                                     x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $item->id }}')">
                                     <i class="fa-solid fa-trash"></i>
+<<<<<<< HEAD
+                                    <!-- Hapus -->
+=======
                                     Hapus
+>>>>>>> 67f34c1281eccc821e05978b47e8c8c32ab198bc
                                 </button>
                             </div>
                         </x-table-body>
