@@ -36,7 +36,7 @@
                         </div>
 
                         <!-- Progress Overview -->
-                        <div class="mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Project Progress -->
                             <div class="bg-surface-50 dark:bg-dark-surface-50 p-4 rounded-xl border border-border dark:border-dark-border">
                                 <h3 class="font-medium mb-3">Proyek Aktif</h3>
@@ -85,27 +85,10 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Supervisor -->
-                            <div class="bg-surface-50 dark:bg-dark-surface-50 p-4 rounded-xl border border-border dark:border-dark-border">
-                                <h3 class="font-medium mb-3">Dosen Pembimbing</h3>
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
-                                        {{ substr("Dr. Ahmad Budiman", 0, 1) }}
-                                    </div>
-                                    <div>
-                                        <p class="font-medium">Dr. Ahmad Budiman</p>
-                                        <p class="text-sm text-text-secondary">3 proyek aktif</p>
-                                    </div>
-                                </div>
-                                <button class="mt-4 w-full py-2 border border-primary text-primary rounded-lg hover:bg-primary/10 transition">
-                                    Hubungi
-                                </button>
-                            </div>
                         </div>
 
                         <!-- Main Content Tabs -->
-                        <div x-data="{ activeSection: 'projects' }" class="space-y-6">
+                        <div x-data="{ activeSection: 'tasks' }" class="space-y-6">
                             <!-- Navigation -->
                             <div class="flex space-x-4 border-b border-border dark:border-dark-border">
                                 <button @click="activeSection = 'tasks'" 
@@ -184,25 +167,59 @@
                             <div x-show="activeSection === 'tasks'" x-transition style="display: none;">
                                 <div class="space-y-4">
                                     <!-- Task Item -->
-                                    <div class="border border-border dark:border-dark-border rounded-lg p-4 hover:shadow-soft transition-shadow">
-                                        <div class="flex justify-between">
-                                            <div>
-                                                <h4 class="font-medium">Membuat ERD Database</h4>
-                                                <p class="text-sm text-text-secondary">Sistem Manajemen Tugas</p>
+                                    @foreach ($projects as $project)
+                                        @foreach ($project->tasks as $task)
+                                            <div class="border border-border dark:border-dark-border rounded-lg p-4 hover:shadow-soft transition-shadow">
+                                                <div class="flex justify-between">
+                                                    <div>
+                                                        <h4 class="font-medium">{{ $task->judul }}</h4>
+                                                        <p class="text-sm text-text-secondary">{{ $project->judul }}</p>
+                                                    </div>
+                                                    {{-- 
+                                                    @php
+                                                        $statusColor = match($task->status) {
+                                                            'belum' => 'bg-gray-200 text-gray-700',
+                                                            'proses' => 'bg-warning/20 text-warning',
+                                                            'selesai' => 'bg-success/20 text-success',
+                                                            default => 'bg-gray-100 text-gray-600'
+                                                        };
+                                                    @endphp
+
+                                                    <span class="px-2 text-sm {{ $statusColor }}">
+                                                        {{ ucfirst($task->status) }}
+                                                    </span> 
+                                                    --}}
+
+                                                    @if ($task->status === 'belum')
+                                                        <span class="px-2 py-3 rounded text-sm bg-gray-200 text-gray-700">
+                                                            {{ ucfirst($task->status) }}
+                                                        </span>
+                                                    @elseif ($task->status === 'proses')
+                                                        <span class="px-2 py-3 rounded text-sm bg-warning/20 text-warning">
+                                                            {{ ucfirst($task->status) }}
+                                                        </span>
+                                                    @else
+                                                        <span class="px-2 py-3 rounded text-sm bg-success/20 text-success">
+                                                            {{ ucfirst($task->status) }}
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                
+                                                <div class="mt-3 flex items-center justify-between">
+                                                    <div class="flex items-center space-x-2 text-sm text-text-secondary">
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                            </path>
+                                                        </svg>
+                                                        <span>{{ \Carbon\Carbon::parse($task->deadline)->translatedFormat('d M Y') }}</span>
+                                                    </div>
+                                                    <button class="px-2 py-1 rounded transition delay-100 text-primary bg-gray-200 hover:bg-primary hover:text-white text-sm">Detail</button>
+                                                </div>
                                             </div>
-                                            <span class="px-2 py-1 text-xs rounded-full bg-success/10 text-success">Selesai</span>
-                                        </div>
-                                        
-                                        <div class="mt-3 flex items-center justify-between">
-                                            <div class="flex items-center space-x-2 text-sm text-text-secondary">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                                </svg>
-                                                <span>12 Jun 2023</span>
-                                            </div>
-                                            <button class="text-primary hover:text-primary-hover text-sm">Detail</button>
-                                        </div>
-                                    </div>
+                                        @endforeach
+                                    @endforeach
+
                                     <!-- End Task Item -->
                                 </div>
                             </div>
@@ -240,68 +257,3 @@
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2 w-80"></div>
 </x-app-layout>
-
-<!-- Initialize Toast Notification -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Toast function
-        window.toast = {
-            success: function(message) {
-                const toast = document.createElement('div');
-                toast.className = 'p-4 bg-success text-white rounded-lg shadow-soft flex items-center justify-between animate-fade-in';
-                toast.innerHTML = `
-                    <div class="flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span>${message}</span>
-                    </div>
-                    <button onclick="this.parentElement.remove()" class="ml-4 text-white hover:text-white/80">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                `;
-                document.getElementById('toast-container').appendChild(toast);
-                setTimeout(() => toast.remove(), 5000);
-            },
-            error: function(message) {
-                const toast = document.createElement('div');
-                toast.className = 'p-4 bg-danger text-white rounded-lg shadow-soft flex items-center justify-between animate-fade-in';
-                toast.innerHTML = `
-                    <div class="flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span>${message}</span>
-                    </div>
-                    <button onclick="this.parentElement.remove()" class="ml-4 text-white hover:text-white/80">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                `;
-                document.getElementById('toast-container').appendChild(toast);
-                setTimeout(() => toast.remove(), 5000);
-            }
-        };
-    });
-</script>
-
-<!-- Custom Animation for Toast -->
-<style>
-    .animate-fade-in {
-        animation: fadeIn 0.3s ease-in-out;
-    }
-    
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-</style>

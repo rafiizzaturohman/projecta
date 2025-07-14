@@ -61,6 +61,9 @@ class Project extends Model
         return $this->belongsTo(User::class, 'mahasiswa_nim', 'nim');
     }
 
+    /**
+     * Relasi ke Tasks
+     */
     public function tasks()
     {
         return $this->hasMany(Task::class);
