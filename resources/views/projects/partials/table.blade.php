@@ -34,7 +34,7 @@
                                 <a href="{{ route('projects.edit', $item->id) }}"
                                    class="text-blue-600 dark:text-blue-400 hover:underline">
                                    <i class="fa-solid fa-pen"></i>
-                                    <!-- Edit -->
+                                    Edit
                                 </a>
 
                                 <button
@@ -43,7 +43,7 @@
                                     x-data
                                     x-on:click="$dispatch('open-modal', '{{ 'confirm-delete-' . $item->id }}')">
                                     <i class="fa-solid fa-trash"></i>
-                                    <!-- Hapus -->
+                                    Hapus
                                 </button>
                             </div>
                         </x-table-body>
