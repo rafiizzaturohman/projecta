@@ -162,12 +162,12 @@
                                     <!-- Task Item -->
                                     @foreach ($projects as $project)
                                         @foreach ($project->tasks as $task)
-                                            <div class="border border-border dark:border-dark-border rounded-lg p-6 hover:shadow-soft transition-shadow">
+                                            <div class="border border-border dark:border-dark-border rounded-lg space-y-4 p-6 hover:shadow-soft transition-shadow">
                                                 <div class="flex justify-between">
                                                     <div>
                                                         <h4 class="font-medium">{{ $task->judul }}</h4>
                                                         <p class="text-sm text-text-secondary">{{ $project->judul }}</p>
-x                                                    </div>
+                                                    </div>
                                                     
                                                     @php
                                                         $statusColor = match($task->status) {
