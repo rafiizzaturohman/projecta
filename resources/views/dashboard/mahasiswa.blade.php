@@ -274,7 +274,6 @@
                         </div>
                     @endforeach
                 @endforeach
-
                 <!-- End Task Item -->
             </div>
         </div>
