@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -11,10 +12,17 @@ class TaskController extends Controller
     // Menampilkan semua task
     public function index()
     {
-        $tasks = Task::with(['project', 'user'])->get();
+        $user = Auth::user();
+
+        $tasks = Task::with(['project', 'user'])
+            ->when($user->role === 'mahasiswa' && $user->nim, function ($query) use ($user) {
+                $query->where('user_nim', $user->nim);
+            })
+            ->get();
+
         return view('tasks.index', compact('tasks'));
     }
-    
+
     public function create()
     {
         $projects = Project::all(); // ambil semua project

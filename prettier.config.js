@@ -1,0 +1,10 @@
+module.exports = {
+    plugins: ['prettier-plugin-blade'],
+    tabWidth: 4,
+    useTabs: false,
+    singleQuote: true,
+    semi: false,
+    bladeBracketSameLine: true,
+    bladeSingleQuote: false,
+    bladeIndentSize: 4,
+}

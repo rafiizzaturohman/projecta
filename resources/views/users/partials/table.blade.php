@@ -29,7 +29,7 @@
             </thead>
     
             <tbody id="userTable-tbody" class="divide-y divide-border dark:divide-dark-border">
-                @include('users.partials.table-body', ['users' => $users])
+                @include('users.partials.tbody', ['users' => $users])
             </tbody>
         </table>
     </div>
