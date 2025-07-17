@@ -1,736 +1,806 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id" class="light">
     <head>
-        <base target="_self" />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Projecta | Modern Project Management</title>
-        <meta
-            name="description"
-            content="Streamline your team's workflow with Projecta - the intuitive web-based project management solution."
-        />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        />
+        <title>Dashboard Manajemen Tugas - Dosen</title>
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
         <script>
             tailwind.config = {
+                darkMode: 'class',
                 theme: {
                     extend: {
-                        colors: {
-                            primary: "#3B82F6",
-                            secondary: "#1E40AF",
-                            accent: "#10B981",
-                        },
                         fontFamily: {
-                            sans: ["Inter", "sans-serif"],
+                            sans: ['Inter', 'IBM Plex Sans', 'sans-serif'],
+                        },
+                        colors: {
+                            primary: '#4C9F9A',
+                            'primary-hover': '#3C8682',
+                            secondary: '#FFC078',
+                            'secondary-hover': '#E6A95F',
+                            background: '#F8FAFC',
+                            surface: '#FFFFFF',
+                            border: '#E2E8F0',
+                            'text-primary': '#1E293B',
+                            'text-secondary': '#64748B',
+                            dark: {
+                                primary: '#3C8F8A',
+                                'primary-hover': '#2E6F6B',
+                                secondary: '#FF7043',
+                                'secondary-hover': '#E95E32',
+                                background: '#1E1E2A',
+                                surface: '#2A2A3D',
+                                border: '#3C3C5A',
+                                'text-primary': '#F1F1F1',
+                                'text-secondary': '#B5B5C1',
+                            },
+                            danger: '#E53935',
+                            success: '#34D399',
+                            info: '#60A5FA',
+                        },
+                        borderRadius: {
+                            xl: '1rem',
+                            '2xl': '1.5rem',
+                        },
+                        boxShadow: {
+                            soft: '0 4px 10px rgba(0, 0, 0, 0.08)',
+                        },
+                        transitionDuration: {
+                            DEFAULT: '200ms',
+                        },
+                        scale: {
+                            101: '1.01',
                         },
                     },
                 },
-            };
+            }
         </script>
         <style>
-            @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+            .chart-container {
+                position: relative;
+                height: 300px;
+            }
         </style>
     </head>
-    <body class="font-sans bg-gray-50 text-gray-800">
-        <header class="bg-white shadow-sm">
-            <nav
-                class="container mx-auto px-6 py-4 flex justify-between items-center"
+    <body
+        class="bg-background text-text-primary font-sans transition-colors duration-200"
+    >
+        <div class="flex min-h-screen">
+            <!-- Sidebar -->
+            <div
+                class="w-64 bg-surface dark:bg-surface-dark shadow-md fixed h-full transition-all duration-200"
             >
-                <div class="flex items-center space-x-2">
-                    <div
-                        class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"
+                <div class="p-6">
+                    <h2
+                        class="text-xl font-semibold text-primary dark:text-primary-dark"
                     >
-                        <span class="text-white font-bold">P</span>
-                    </div>
-                    <span class="text-xl font-bold text-gray-800"
-                        >Projecta</span
-                    >
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a
-                        href="#features"
-                        class="text-gray-600 hover:text-primary transition-colors"
-                        >Features</a
-                    >
-                    <a
-                        href="#pricing"
-                        class="text-gray-600 hover:text-primary transition-colors"
-                        >Pricing</a
-                    >
-                    <a
-                        href="#testimonials"
-                        class="text-gray-600 hover:text-primary transition-colors"
-                        >Testimonials</a
-                    >
-                    <a
-                        href="#contact"
-                        class="text-gray-600 hover:text-primary transition-colors"
-                        >Contact</a
-                    >
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a
-                        href="#"
-                        class="text-gray-600 hover:text-primary transition-colors"
-                        >Log In</a
-                    >
-                    <a
-                        href="#"
-                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors"
-                        >Sign Up</a
-                    >
-                </div>
-                <button class="md:hidden text-gray-600">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </nav>
-        </header>
-
-        <main>
-            <!-- Hero Section -->
-            <section class="py-16 md:py-24 bg-white">
-                <div
-                    class="container mx-auto px-6 flex flex-col md:flex-row items-center"
-                >
-                    <div class="md:w-1/2 mb-12 md:mb-0">
-                        <h1
-                            class="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
-                        >
-                            Manage Projects
-                            <span class="text-primary">Effortlessly</span>
-                        </h1>
-                        <p class="text-lg text-gray-600 mb-8">
-                            Projecta helps teams organize, track, and
-                            collaborate on projects with intuitive tools and
-                            real-time updates.
-                        </p>
-                        <div
-                            class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
-                        >
-                            <a
-                                href="#"
-                                class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition-colors text-center font-medium"
-                                >Get Started Free</a
-                            >
-                            <a
-                                href="#"
-                                class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors text-center font-medium"
-                                >Watch Demo</a
-                            >
-                        </div>
-                    </div>
-                    <div class="md:w-1/2">
-                        <img
-                            src="https://picsum.photos/600/400?random=1"
-                            alt="Projecta dashboard interface"
-                            class="w-full rounded-xl shadow-lg"
-                            loading="lazy"
-                        />
-                    </div>
-                </div>
-            </section>
-
-            <!-- Features Section -->
-            <section id="features" class="py-16 bg-gray-50">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-16">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                            Powerful Features
-                        </h2>
-                        <p class="text-gray-600 max-w-2xl mx-auto">
-                            Everything you need to manage projects efficiently
-                            and collaborate with your team.
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div
-                            class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow"
-                        >
-                            <div
-                                class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4"
-                            >
-                                <i
-                                    class="fas fa-tasks text-primary text-xl"
-                                ></i>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3">
-                                Task Management
-                            </h3>
-                            <p class="text-gray-600">
-                                Create, assign, and track tasks with deadlines
-                                and priorities to keep projects on schedule.
-                            </p>
-                        </div>
-                        <div
-                            class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow"
-                        >
-                            <div
-                                class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4"
-                            >
-                                <i class="fas fa-users text-accent text-xl"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3">
-                                Team Collaboration
-                            </h3>
-                            <p class="text-gray-600">
-                                Real-time updates, comments, and file sharing to
-                                keep everyone aligned and productive.
-                            </p>
-                        </div>
-                        <div
-                            class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow"
-                        >
-                            <div
-                                class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4"
-                            >
-                                <i
-                                    class="fas fa-chart-line text-purple-500 text-xl"
-                                ></i>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3">
-                                Progress Tracking
-                            </h3>
-                            <p class="text-gray-600">
-                                Visual dashboards and reports to monitor project
-                                health and team performance.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Pricing Section -->
-            <section id="pricing" class="py-16 bg-white">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-16">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                            Simple, Transparent Pricing
-                        </h2>
-                        <p class="text-gray-600 max-w-2xl mx-auto">
-                            Choose the plan that fits your team's needs.
-                        </p>
-                    </div>
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
-                    >
-                        <div
-                            class="border border-gray-200 rounded-xl p-6 hover:border-primary transition-colors"
-                        >
-                            <h3 class="text-xl font-semibold mb-4">Starter</h3>
-                            <p class="text-gray-600 mb-6">
-                                Perfect for small teams getting started
-                            </p>
-                            <div class="mb-6">
-                                <span class="text-4xl font-bold">$9</span>
-                                <span class="text-gray-600">/user/month</span>
-                            </div>
-                            <ul class="space-y-3 mb-8">
-                                <li class="flex items-center">
-                                    <i
-                                        class="fas fa-check text-green-500 mr-2"
-                                    ></i>
-                                    Up to 10 users
-                                </li>
-                                <li class="flex items-center">
-                                    <i
-                                        class="fas fa-check text-green-500 mr-2"
-                                    ></i>
-                                    Basic task management
-                                </li>
-                                <li class="flex items-center">
-                                    <i
-                                        class="fas fa-check text-green-500 mr-2"
-                                    ></i>
-                                    5GB storage
-                                </li>
-                            </ul>
-                            <a
-                                href="#"
-                                class="block text-center border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-colors"
-                                >Get Started</a
-                            >
-                        </div>
-                        <div
-                            class="border-2 border-primary rounded-xl p-6 bg-gray-50 relative"
-                        >
-                            <div
-                                class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg"
-                            >
-                                POPULAR
-                            </div>
-                            <h3 class="text-xl font-semibold mb-4">
-                                Professional
-                            </h3>
-                            <p class="text-gray-600 mb-6">
-                                For growing teams with more needs
-                            </p>
-                            <div class="mb-6">
-                                <span class="text-4xl font-bold">$19</span>
-                                <span class="text-gray-600">/user/month</span>
-                            </div>
-                            <ul class="space-y-3 mb-8">
-                                <li class="flex items-center">
-                                    <i
-                                        class="fas fa-check text-green-500 mr-2"
-                                    ></i>
-                                    Up to 50 users
-                                </li>
-                                <li class="flex items-center">
-                                    <i
-                                        class="fas fa-check text-green-500 mr-2"
-                                    ></i>
-                                    Advanced features
-                                </li>
-                                <li class="flex items-center">
-                                    <i
-                                        class="fas fa-check text-green-500 mr-2"
-                                    ></i>
-                                    50GB storage
-                                </li>
-                                <li class="flex items-center">
-                                    <i
-                                        class="fas fa-check text-green-500 mr-2"
-                                    ></i>
-                                    Priority support
-                                </li>
-                            </ul>
-                            <a
-                                href="#"
-                                class="block text-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors"
-                                >Get Started</a
-                            >
-                        </div>
-                        <div
-                            class="border border-gray-200 rounded-xl p-6 hover:border-primary transition-colors"
-                        >
-                            <h3 class="text-xl font-semibold mb-4">
-                                Enterprise
-                            </h3>
-                            <p class="text-gray-600 mb-6">
-                                For large organizations
-                            </p>
-                            <div class="mb-6">
-                                <span class="text-4xl font-bold">$39</span>
-                                <span class="text-gray-600">/user/month</span>
-                            </div>
-                            <ul class="space-y-3 mb-8">
-                                <li class="flex items-center">
-                                    <i
-                                        class="fas fa-check text-green-500 mr-2"
-                                    ></i>
-                                    Unlimited users
-                                </li>
-                                <li class="flex items-center">
-                                    <i
-                                        class="fas fa-check text-green-500 mr-2"
-                                    ></i>
-                                    All features included
-                                </li>
-                                <li class="flex items-center">
-                                    <i
-                                        class="fas fa-check text-green-500 mr-2"
-                                    ></i>
-                                    500GB+ storage
-                                </li>
-                                <li class="flex items-center">
-                                    <i
-                                        class="fas fa-check text-green-500 mr-2"
-                                    ></i>
-                                    Dedicated account manager
-                                </li>
-                            </ul>
-                            <a
-                                href="#"
-                                class="block text-center border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-colors"
-                                >Contact Sales</a
-                            >
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Testimonials Section -->
-            <section id="testimonials" class="py-16 bg-gray-50">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-16">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                            Trusted by Teams Worldwide
-                        </h2>
-                        <p class="text-gray-600 max-w-2xl mx-auto">
-                            Join thousands of teams who have transformed their
-                            workflow with Projecta.
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="bg-white p-6 rounded-xl shadow-sm">
-                            <div class="flex items-center mb-4">
-                                <img
-                                    src="https://picsum.photos/100?random=2"
-                                    alt="Sarah Johnson"
-                                    class="w-12 h-12 rounded-full mr-4"
-                                />
-                                <div>
-                                    <h4 class="font-semibold">Sarah Johnson</h4>
-                                    <p class="text-gray-600 text-sm">
-                                        Product Manager, TechCorp
-                                    </p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700">
-                                "Projecta has transformed how our team
-                                collaborates. We've seen a 40% increase in
-                                productivity since switching."
-                            </p>
-                            <div class="flex mt-4 text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl shadow-sm">
-                            <div class="flex items-center mb-4">
-                                <img
-                                    src="https://picsum.photos/100?random=3"
-                                    alt="Michael Chen"
-                                    class="w-12 h-12 rounded-full mr-4"
-                                />
-                                <div>
-                                    <h4 class="font-semibold">Michael Chen</h4>
-                                    <p class="text-gray-600 text-sm">
-                                        CTO, StartupX
-                                    </p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700">
-                                "The intuitive interface and powerful features
-                                make Projecta the best project management tool
-                                we've used."
-                            </p>
-                            <div class="flex mt-4 text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl shadow-sm">
-                            <div class="flex items-center mb-4">
-                                <img
-                                    src="https://picsum.photos/100?random=4"
-                                    alt="Emma Rodriguez"
-                                    class="w-12 h-12 rounded-full mr-4"
-                                />
-                                <div>
-                                    <h4 class="font-semibold">
-                                        Emma Rodriguez
-                                    </h4>
-                                    <p class="text-gray-600 text-sm">
-                                        Marketing Director, BrandCo
-                                    </p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700">
-                                "Our marketing team is more organized than ever.
-                                The progress tracking features are
-                                game-changers."
-                            </p>
-                            <div class="flex mt-4 text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CTA Section -->
-            <section class="py-16 bg-primary text-white">
-                <div class="container mx-auto px-6 text-center">
-                    <h2 class="text-3xl font-bold mb-6">
-                        Ready to Transform Your Workflow?
+                        Manajemen Tugas
                     </h2>
-                    <p class="text-lg mb-8 max-w-2xl mx-auto">
-                        Join thousands of teams who are already managing their
-                        projects more efficiently with Projecta.
-                    </p>
+                </div>
+                <nav class="mt-6 px-4">
                     <a
                         href="#"
-                        class="inline-block bg-white text-primary px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-                        >Start Your Free Trial</a
+                        class="flex items-center px-4 py-3 rounded-xl bg-primary/10 text-primary dark:text-primary-dark font-medium"
                     >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 mr-3"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                            />
+                        </svg>
+                        Dashboard
+                    </a>
+                    <a
+                        href="#"
+                        class="flex items-center px-4 py-3 rounded-xl mt-2 text-text-secondary dark:text-text-secondary-dark hover:bg-surface dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 mr-3"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                            />
+                        </svg>
+                        Mata Kuliah
+                    </a>
+                    <a
+                        href="#"
+                        class="flex items-center px-4 py-3 rounded-xl mt-2 text-text-secondary dark:text-text-secondary-dark hover:bg-surface dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 mr-3"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                            />
+                        </svg>
+                        Tugas
+                    </a>
+                    <a
+                        href="#"
+                        class="flex items-center px-4 py-3 rounded-xl mt-2 text-text-secondary dark:text-text-secondary-dark hover:bg-surface dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 mr-3"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            />
+                        </svg>
+                        Project
+                    </a>
+                    <a
+                        href="#"
+                        class="flex items-center px-4 py-3 rounded-xl mt-2 text-text-secondary dark:text-text-secondary-dark hover:bg-surface dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 mr-3"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                            />
+                        </svg>
+                        Mahasiswa
+                    </a>
+                </nav>
+                <div class="absolute bottom-0 w-full p-4">
+                    <button
+                        id="theme-toggle"
+                        class="w-full flex items-center justify-center px-4 py-2 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark text-text-primary dark:text-text-primary-dark hover:bg-surface/80 dark:hover:bg-surface-dark/80 transition-colors duration-200"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 mr-2"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                            />
+                        </svg>
+                        Toggle Dark Mode
+                    </button>
                 </div>
-            </section>
+            </div>
 
-            <!-- Contact Section -->
-            <section id="contact" class="py-16 bg-white">
-                <div class="container mx-auto px-6">
-                    <div class="max-w-4xl mx-auto">
-                        <div class="text-center mb-12">
-                            <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                                Get In Touch
-                            </h2>
-                            <p class="text-gray-600">
-                                Have questions? Our team is here to help.
-                            </p>
-                        </div>
-                        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label
-                                    for="name"
-                                    class="block text-gray-700 mb-2"
-                                    >Name</label
-                                >
-                                <input
-                                    type="text"
-                                    id="name"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            <!-- Main Content -->
+            <div class="flex-1 ml-64 p-8">
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="text-2xl font-bold">Dashboard Dosen</h1>
+                    <div class="flex space-x-2">
+                        <button
+                            class="px-4 py-2 rounded-xl bg-surface dark:bg-surface-dark border border-border dark:border-border-dark text-text-secondary dark:text-text-secondary-dark hover:bg-surface/80 dark:hover:bg-surface-dark/80 transition-colors duration-200"
+                        >
+                            Semester Ini
+                        </button>
+                        <button
+                            class="px-4 py-2 rounded-xl bg-surface dark:bg-surface-dark border border-border dark:border-border-dark text-text-secondary dark:text-text-secondary-dark hover:bg-surface/80 dark:hover:bg-surface-dark/80 transition-colors duration-200"
+                        >
+                            Semester Lalu
+                        </button>
+                        <button
+                            class="px-4 py-2 rounded-xl bg-surface dark:bg-surface-dark border border-border dark:border-border-dark text-text-secondary dark:text-text-secondary-dark hover:bg-surface/80 dark:hover:bg-surface-dark/80 transition-colors duration-200 flex items-center"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 mr-2"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                 />
-                            </div>
-                            <div>
-                                <label
-                                    for="email"
-                                    class="block text-gray-700 mb-2"
-                                    >Email</label
-                                >
-                                <input
-                                    type="email"
-                                    id="email"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                                />
-                            </div>
-                            <div class="md:col-span-2">
-                                <label
-                                    for="subject"
-                                    class="block text-gray-700 mb-2"
-                                    >Subject</label
-                                >
-                                <input
-                                    type="text"
-                                    id="subject"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                                />
-                            </div>
-                            <div class="md:col-span-2">
-                                <label
-                                    for="message"
-                                    class="block text-gray-700 mb-2"
-                                    >Message</label
-                                >
-                                <textarea
-                                    id="message"
-                                    rows="4"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                                ></textarea>
-                            </div>
-                            <div class="md:col-span-2">
-                                <button
-                                    type="submit"
-                                    class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition-colors font-medium"
-                                >
-                                    Send Message
-                                </button>
-                            </div>
-                        </form>
+                            </svg>
+                            Filter
+                        </button>
                     </div>
                 </div>
-            </section>
-        </main>
 
-        <footer class="bg-gray-900 text-gray-400 py-12">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div>
-                        <div class="flex items-center space-x-2 mb-4">
-                            <div
-                                class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center"
-                            >
-                                <span class="text-white font-bold">P</span>
-                            </div>
-                            <span class="text-xl font-bold text-white"
-                                >Projecta</span
-                            >
-                        </div>
-                        <p class="mb-4">
-                            The modern way to manage projects and collaborate
-                            with your team.
-                        </p>
-                        <div class="flex space-x-4">
-                            <a
-                                href="#"
-                                class="text-gray-400 hover:text-white transition-colors"
-                                ><i class="fab fa-twitter"></i
-                            ></a>
-                            <a
-                                href="#"
-                                class="text-gray-400 hover:text-white transition-colors"
-                                ><i class="fab fa-facebook-f"></i
-                            ></a>
-                            <a
-                                href="#"
-                                class="text-gray-400 hover:text-white transition-colors"
-                                ><i class="fab fa-linkedin-in"></i
-                            ></a>
-                            <a
-                                href="#"
-                                class="text-gray-400 hover:text-white transition-colors"
-                                ><i class="fab fa-instagram"></i
-                            ></a>
-                        </div>
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div
+                        class="bg-surface dark:bg-surface-dark rounded-2xl p-6 shadow-soft hover:shadow-md transition-shadow duration-200 hover:scale-101"
+                    >
+                        <h3
+                            class="text-text-secondary dark:text-text-secondary-dark text-sm font-medium"
+                        >
+                            Total Mata Kuliah
+                        </h3>
+                        <p class="text-3xl font-bold mt-2">5</p>
                     </div>
-                    <div>
-                        <h3 class="text-white font-semibold mb-4">Product</h3>
-                        <ul class="space-y-2">
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >Features</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >Pricing</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >Integrations</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >Updates</a
-                                >
-                            </li>
-                        </ul>
+                    <div
+                        class="bg-surface dark:bg-surface-dark rounded-2xl p-6 shadow-soft hover:shadow-md transition-shadow duration-200 hover:scale-101"
+                    >
+                        <h3
+                            class="text-text-secondary dark:text-text-secondary-dark text-sm font-medium"
+                        >
+                            Total Tugas Aktif
+                        </h3>
+                        <p class="text-3xl font-bold mt-2">12</p>
                     </div>
-                    <div>
-                        <h3 class="text-white font-semibold mb-4">Company</h3>
-                        <ul class="space-y-2">
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >About Us</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >Careers</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >Blog</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >Press</a
-                                >
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-white font-semibold mb-4">Support</h3>
-                        <ul class="space-y-2">
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >Help Center</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >Community</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >Contact Us</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="hover:text-white transition-colors"
-                                    >Status</a
-                                >
-                            </li>
-                        </ul>
+                    <div
+                        class="bg-surface dark:bg-surface-dark rounded-2xl p-6 shadow-soft hover:shadow-md transition-shadow duration-200 hover:scale-101"
+                    >
+                        <h3
+                            class="text-text-secondary dark:text-text-secondary-dark text-sm font-medium"
+                        >
+                            Total Project Aktif
+                        </h3>
+                        <p class="text-3xl font-bold mt-2">3</p>
                     </div>
                 </div>
+
+                <!-- Data Tugas -->
                 <div
-                    class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
+                    class="bg-surface dark:bg-surface-dark rounded-2xl shadow-soft mb-8 overflow-hidden"
                 >
-                    <p>© 2023 Projecta. All rights reserved.</p>
-                    <div class="flex space-x-6 mt-4 md:mt-0">
-                        <a href="#" class="hover:text-white transition-colors"
-                            >Privacy Policy</a
+                    <div
+                        class="bg-primary dark:bg-primary-dark px-6 py-4 rounded-t-2xl"
+                    >
+                        <h2 class="text-white text-lg font-semibold">
+                            Data Tugas
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="overflow-x-auto">
+                            <table
+                                class="min-w-full divide-y divide-border dark:divide-border-dark"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            No
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            Mata Kuliah
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            Judul Tugas
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            Deadline
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            Total Pengumpulan
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            Aksi
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody
+                                    class="divide-y divide-border dark:divide-border-dark"
+                                >
+                                    <tr
+                                        class="hover:bg-surface/50 dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                                    >
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            1
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            Pemrograman Web
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            Tugas 1 - HTML/CSS
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            15 Okt 2023
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            45/50
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <button
+                                                class="px-3 py-1 rounded-lg bg-primary dark:bg-primary-dark text-white hover:bg-primary-hover dark:hover:bg-primary-hover-dark transition-colors duration-200 text-sm"
+                                            >
+                                                Detail
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        class="hover:bg-surface/50 dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                                    >
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            2
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            Basis Data
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            Tugas 2 - Normalisasi
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            20 Okt 2023
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            38/50
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <button
+                                                class="px-3 py-1 rounded-lg bg-primary dark:bg-primary-dark text-white hover:bg-primary-hover dark:hover:bg-primary-hover-dark transition-colors duration-200 text-sm"
+                                            >
+                                                Detail
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        class="hover:bg-surface/50 dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                                    >
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            3
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            Kecerdasan Buatan
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            Tugas 1 - Search Algorithm
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            25 Okt 2023
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            42/50
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <button
+                                                class="px-3 py-1 rounded-lg bg-primary dark:bg-primary-dark text-white hover:bg-primary-hover dark:hover:bg-primary-hover-dark transition-colors duration-200 text-sm"
+                                            >
+                                                Detail
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Project -->
+                <div
+                    class="bg-surface dark:bg-surface-dark rounded-2xl shadow-soft mb-8 overflow-hidden"
+                >
+                    <div
+                        class="bg-primary dark:bg-primary-dark px-6 py-4 rounded-t-2xl"
+                    >
+                        <h2 class="text-white text-lg font-semibold">
+                            Data Project
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="overflow-x-auto">
+                            <table
+                                class="min-w-full divide-y divide-border dark:divide-border-dark"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            No
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            Mata Kuliah
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            Judul Project
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            Deadline
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            Kelompok
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            Status
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                        >
+                                            Aksi
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody
+                                    class="divide-y divide-border dark:divide-border-dark"
+                                >
+                                    <tr
+                                        class="hover:bg-surface/50 dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                                    >
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            1
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            Pemrograman Web
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            Project Akhir - Sistem Informasi
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            15 Des 2023
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            10/10
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span
+                                                class="px-2 py-1 rounded-full text-xs bg-secondary/20 text-secondary-dark dark:text-secondary-dark"
+                                                >Dalam Proses</span
+                                            >
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <button
+                                                class="px-3 py-1 rounded-lg bg-primary dark:bg-primary-dark text-white hover:bg-primary-hover dark:hover:bg-primary-hover-dark transition-colors duration-200 text-sm"
+                                            >
+                                                Detail
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        class="hover:bg-surface/50 dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                                    >
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            2
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            Basis Data
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            Project - Perancangan Database
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            10 Des 2023
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            8/10
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span
+                                                class="px-2 py-1 rounded-full text-xs bg-success/20 text-success"
+                                                >Selesai</span
+                                            >
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <button
+                                                class="px-3 py-1 rounded-lg bg-primary dark:bg-primary-dark text-white hover:bg-primary-hover dark:hover:bg-primary-hover-dark transition-colors duration-200 text-sm"
+                                            >
+                                                Detail
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grafik dan Detail Pengumpulan -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Grafik Doughnut -->
+                    <div
+                        class="bg-surface dark:bg-surface-dark rounded-2xl shadow-soft overflow-hidden"
+                    >
+                        <div
+                            class="bg-primary dark:bg-primary-dark px-6 py-4 rounded-t-2xl"
                         >
-                        <a href="#" class="hover:text-white transition-colors"
-                            >Terms of Service</a
+                            <h2 class="text-white text-lg font-semibold">
+                                Persentase Pengumpulan Tugas per Mata Kuliah
+                            </h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="chart-container">
+                                <canvas id="doughnutChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detail Pengumpulan -->
+                    <div
+                        class="bg-surface dark:bg-surface-dark rounded-2xl shadow-soft overflow-hidden"
+                    >
+                        <div
+                            class="bg-primary dark:bg-primary-dark px-6 py-4 rounded-t-2xl"
                         >
-                        <a href="#" class="hover:text-white transition-colors"
-                            >Cookies</a
-                        >
+                            <h2 class="text-white text-lg font-semibold">
+                                Detail Pengumpulan Tugas
+                            </h2>
+                        </div>
+                        <div class="p-6">
+                            <div class="overflow-x-auto">
+                                <table
+                                    class="min-w-full divide-y divide-border dark:divide-border-dark"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="px-4 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                            >
+                                                Mata Kuliah
+                                            </th>
+                                            <th
+                                                class="px-4 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                            >
+                                                Total Mahasiswa
+                                            </th>
+                                            <th
+                                                class="px-4 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                            >
+                                                Sudah Mengumpulkan
+                                            </th>
+                                            <th
+                                                class="px-4 py-3 text-left text-xs font-medium text-text-secondary dark:text-text-secondary-dark uppercase tracking-wider"
+                                            >
+                                                Persentase
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody
+                                        class="divide-y divide-border dark:divide-border-dark"
+                                    >
+                                        <tr
+                                            class="hover:bg-surface/50 dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                                        >
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                Pemrograman Web
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                50
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                45
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                90%
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="hover:bg-surface/50 dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                                        >
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                Basis Data
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                50
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                38
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                76%
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="hover:bg-surface/50 dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                                        >
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                Kecerdasan Buatan
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                50
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                42
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                84%
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="hover:bg-surface/50 dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                                        >
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                Sistem Operasi
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                45
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                40
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                89%
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="hover:bg-surface/50 dark:hover:bg-surface-dark/50 transition-colors duration-200"
+                                        >
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                Jaringan Komputer
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                48
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                35
+                                            </td>
+                                            <td
+                                                class="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                73%
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
 
         <script>
-            // Navigation click handler
-            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-                anchor.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute("href");
-                    if (targetId === "#") return;
-
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: "smooth",
-                        });
-                    }
-                });
+            // Doughnut Chart
+            const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+            const doughnutChart = new Chart(doughnutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pemrograman Web', 'Basis Data', 'Kecerdasan Buatan', 'Sistem Operasi', 'Jaringan Komputer'],
+                    datasets: [{
+                        data: [45, 38, 42, 40, 35],
+                        backgroundColor: [
+                            '#4C9F9A',
+                            '#FFC078',
+                            '#60A5FA',
+                            '#34D399',
+                            '#E53935'
+                        ],
+                        hoverBackgroundColor: [
+                            '#3C8682',
+                            '#E6A95F',
+                            '#3B82F6',
+                            '#10B981',
+                            '#DC2626'
+                        ],
+                        borderWidth: 0,
+                    }],
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#1E293B',
+                                font: {
+                                    family: "'Inter', 'IBM Plex Sans', sans-serif"
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return ${label}: ${value} (${percentage}%);
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%',
+                }
             });
 
-            // Mobile menu toggle (placeholder - would need more implementation)
-            document
-                .querySelector(".md\\:hidden")
-                .addEventListener("click", function () {
-                    alert(
-                        "Mobile menu would open here in a full implementation"
-                    );
-                });
+            // Dark mode toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+
+                // Update chart colors when theme changes
+                const isDark = document.documentElement.classList.contains('dark');
+                doughnutChart.options.plugins.legend.labels.color = isDark ? '#F1F1F1' : '#1E293B';
+                doughnutChart.update();
+            });
         </script>
     </body>
 </html>
