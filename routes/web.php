@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
+    DashboardController,
     ProfileController,
     ProdiController,
     MatakuliahController,
@@ -16,10 +17,16 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::middleware([
+    'auth', 'verified'
+])->group(function () {
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+});
+
 // Dashboard - hanya untuk user yang sudah login dan verifikasi email
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Group khusus ADMIN
 Route::middleware([

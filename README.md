@@ -4,7 +4,7 @@ Projecta, sebuah aplikasi berbasis web yang dirancang untuk memfasilitasi kolabo
 
 ## 🎯 Fitur Utama
 
--   🔐 Autentikasi Peran: Mendukung peran student, lecturer, dan admin.
+-   🔐 Autentikasi Peran: Mendukung peran mahasiswa, dosen, dan admin.
 
 -   📚 Manajemen Mata Kuliah: Dosen dapat membuat dan mengelola data mata kuliah.
 
@@ -44,11 +44,17 @@ Projecta dikembangkan untuk:
 
 [MySQL](https://www.mysql.com/)
 
+[TailwindCSS](https://tailwindcss.com/)
+
+[Laravel Starter Kit](https://laravel.com/starter-kits)
+
 ## 🛠️ Teknologi yang Digunakan
 
--   Framework: Laravel 12
+-   Framework: Laravel 12 + Starter Kit (Laravel Breeze)
 
 -   Database: MySQL
+
+-   DBMS: phpmyadmin by XAMPP
 
 -   Frontend: Blade + Tailwind CSS
 

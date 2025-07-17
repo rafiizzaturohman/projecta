@@ -10,7 +10,7 @@
 
             {{-- Judul --}}
             <div class="mb-4">
-                <x-input-label for="kd_prodi" value="Kd_Prodi" />
+                <x-input-label for="kd_prodi" value="kd_Prodi" />
                 <x-text-input id="kd_prodi" name="kd_prodi" type="text" :value="old('kd_prodi')" required />
                 <x-input-error :messages="$errors->get('kd_prodi')" class="mt-1" />
             </div>

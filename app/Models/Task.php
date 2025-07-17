@@ -14,6 +14,22 @@ class Task extends Model
     protected $guarded = ['id'];
 
     /**
+     * Memanggil fungsi update status yang ada pada model project agar
+     * dapat secara otomatis melakukan perubahan pada status project
+     */
+    protected static function booted()
+    {
+        static::saved(function ($task) {
+            $task->project->updateStatus();
+        });
+
+        static::deleted(function ($task) {
+            $task->project->updateStatus();
+        });
+    }
+
+
+    /**
      * Relasi ke Project
      */
     public function project()

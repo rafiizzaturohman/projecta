@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Matakuliah;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MatakuliahController extends Controller
@@ -55,7 +56,7 @@ class MatakuliahController extends Controller
     public function edit($id)
     {
         $matakuliah = Matakuliah::findOrFail($id);
-        $dosen= user::where('role', 'dosen')->get();
+        $dosen= User::where('role', 'dosen')->get();
         return view('matakuliah.edit', compact('matakuliah', 'dosen'));
     }
 
