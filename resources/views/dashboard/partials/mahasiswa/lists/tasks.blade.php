@@ -10,7 +10,7 @@
             @foreach ($projects as $project)
                 @foreach ($project->tasks as $task)
                     <div
-                        class="border border-border dark:border-dark-border rounded-xl space-y-4 p-6 hover:shadow-soft transition-shadow"
+                        class="border border-border dark:border-dark-border rounded-xl space-y-4 p-6 hover:shadow-soft transition-all hover:scale-101"
                     >
                         <div class="flex justify-between">
                             <div>

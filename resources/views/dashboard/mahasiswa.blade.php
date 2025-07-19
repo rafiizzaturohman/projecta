@@ -74,8 +74,8 @@
             </button>
         </div>
 
-        @include('dashboard.partials.mahasiswa.sections.projects')
+        @include('dashboard.partials.mahasiswa.lists.projects')
 
-        @include('dashboard.partials.mahasiswa.sections.tasks')
+        @include('dashboard.partials.mahasiswa.lists.tasks')
     </div>
 </section>

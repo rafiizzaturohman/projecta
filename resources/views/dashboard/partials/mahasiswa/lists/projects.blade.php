@@ -11,7 +11,7 @@
                 @endphp
 
                 <div
-                    class="border border-border dark:border-dark-border rounded-xl overflow-hidden hover:shadow-soft transition-shadow"
+                    class="border border-border dark:border-dark-border rounded-xl overflow-hidden hover:shadow-soft transition-all hover:scale-101"
                 >
                     <div class="p-5">
                         <div class="flex justify-between items-start">
