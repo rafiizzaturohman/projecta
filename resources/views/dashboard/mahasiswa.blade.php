@@ -16,41 +16,43 @@
         @include('dashboard.partials.mahasiswa.count.projects')
     </div>
 
-    <!-- Progress Overview -->
-    <div class="mb-8 grid grid-cols-1 gap-6">
+    {{--
+        <!-- Progress Overview -->
+        <div class="mb-8 grid grid-cols-1 gap-6">
         <!-- Task Progress -->
         <div
-            class="bg-surface-50 dark:bg-dark-surface-50 p-4 rounded-xl border border-border dark:border-dark-border"
+        class="bg-surface-50 dark:bg-dark-surface-50 p-4 rounded-xl border border-border dark:border-dark-border"
         >
-            <h3 class="font-medium mb-3">Tugas Mendekati Deadline</h3>
-            <div class="space-y-2">
-                <div>
-                    <div class="flex justify-between text-sm mb-1">
-                        <span>Analisis Requirements</span>
-                        <span>2 hari lagi</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div
-                            class="bg-warning h-2 rounded-full"
-                            style="width: 85%"
-                        ></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm mb-1">
-                        <span>UI Design</span>
-                        <span>5 hari lagi</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div
-                            class="bg-secondary h-2 rounded-full"
-                            style="width: 60%"
-                        ></div>
-                    </div>
-                </div>
-            </div>
+        <h3 class="font-medium mb-3">Tugas Mendekati Deadline</h3>
+        <div class="space-y-2">
+        <div>
+        <div class="flex justify-between text-sm mb-1">
+        <span>Analisis Requirements</span>
+        <span>2 hari lagi</span>
         </div>
-    </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+        <div
+        class="bg-warning h-2 rounded-full"
+        style="width: 85%"
+        ></div>
+        </div>
+        </div>
+        <div>
+        <div class="flex justify-between text-sm mb-1">
+        <span>UI Design</span>
+        <span>5 hari lagi</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+        <div
+        class="bg-secondary h-2 rounded-full"
+        style="width: 60%"
+        ></div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    --}}
 
     <!-- Main Content Tabs -->
     <div x-data="{ activeSection: 'tasks' }" class="space-y-6">
