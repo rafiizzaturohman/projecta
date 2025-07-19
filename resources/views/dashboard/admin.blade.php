@@ -1,4 +1,9 @@
 <section>
+    <div class="p-4">
+        <h3 class="text-xl font-bold mb-2">Admin Dashboard</h3>
+        <p>Welcome, {{ $userName }}! You can monitor all user projects.</p>
+    </div>
+
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
         <!-- Total Proyek -->

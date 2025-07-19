@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
@@ -13,17 +15,43 @@ class DashboardController extends Controller
 
         // Ambil semua project + total task dan task selesai untuk progress
         $projects = Project::withCount([
-            'tasks as total_tasks',
-            'tasks as completed_tasks' => function ($query) {
-                $query->where('status', 'selesai');
-            },
-        ])
-        // Ambil 1 task milik user per project
-        ->with(['tasks' => function ($query) use ($user) {
-            $query->where('user_nim', $user->nim)->limit(1);
-        }])
-        ->get();
+                'tasks as total_tasks',
+                'tasks as completed_tasks' => function ($query) {
+                    $query->where('status', 'selesai');
+                },
+            ])
+            ->with(['tasks' => function ($query) use ($user) {
+                $query->where('user_nim', $user->nim)->limit(1);
+            }])
+            ->get();
 
-        return view('dashboard', compact('projects'));
+        // Jumlah tugas milik mahasiswa
+        $totalTasks = Task::where('user_nim', $user->nim)->count();
+
+        // Jumlah proyek yang mahasiswa terlibat (misal dia ketua/anggota)
+        $activeProjects = Project::whereHas('tasks', function ($query) use ($user) {
+                $query->where('user_nim', $user->nim);
+            })->count();
+
+        // Tugas dengan deadline < 3 hari ke depan (dan belum selesai)
+        $nearDeadlineTasks = Task::where('user_nim', $user->nim)
+            ->where('status', '!=', 'selesai')
+            ->whereDate('deadline', '<=', Carbon::now()->addDays(3))
+            ->whereDate('deadline', '>=', Carbon::now())
+            ->count();
+            
+        // Jumlah tugas yang baru saja ditambahkan
+        $recentProjects = Project::where('created_at', '>=', Carbon::now()->subWeek())
+            ->whereHas('tasks', function ($query) use ($user) {
+                $query->where('user_nim', $user->nim);
+            })->count();
+
+        return view('dashboard', compact(
+            'projects',
+            'totalTasks',
+            'activeProjects',
+            'nearDeadlineTasks',
+            'recentProjects'
+        ));
     }
 }
