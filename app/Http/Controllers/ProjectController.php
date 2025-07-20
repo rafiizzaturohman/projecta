@@ -12,10 +12,17 @@ class ProjectController extends Controller
 {
     // Menampilkan semua project
     public function index()
-    {
-        $projects = Project::with(['prodi', 'matakuliah', 'mahasiswa'])->get();
-        return view('projects.index', compact('projects'));
-    }
+{
+    $user = Auth::user();
+
+    $projects = Project::with(['prodi', 'matakuliah', 'mahasiswa'])
+        ->whereHas('members', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })
+        ->get();
+
+    return view('projects.index', compact('projects'));
+}
 
     // Menyimpan project baru
     public function store(Request $request)

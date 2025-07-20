@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Http\Controllers\StatsController;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
@@ -13,7 +13,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        // Ambil semua project + total task dan task selesai untuk progress
+        // Ambil semua proyek dan progress tugas user (untuk tampilan dashboard)
         $projects = Project::withCount([
                 'tasks as total_tasks',
                 'tasks as completed_tasks' => function ($query) {
@@ -22,36 +22,54 @@ class DashboardController extends Controller
             ])
             ->with(['tasks' => function ($query) use ($user) {
                 $query->where('user_nim', $user->nim)->limit(1);
-            }])
+            }])->whereHas('members', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
             ->get();
 
-        // Jumlah tugas milik mahasiswa
-        $totalTasks = Task::where('user_nim', $user->nim)->count();
+         // Recent Tasks milik user
+        $recentTasks = Task::where('user_nim', $user->nim)
+            ->latest('updated_at')
+            ->take(5)
+            ->get()
+            ->map(function ($task) {
+                return [
+                    'type' => 'task',
+                    'title' => $task->judul,
+                    'status' => $task->status,
+                    'updated_at' => $task->updated_at,
+                ];
+            });
 
-        // Jumlah proyek yang mahasiswa terlibat (misal dia ketua/anggota)
-        $activeProjects = Project::whereHas('tasks', function ($query) use ($user) {
-                $query->where('user_nim', $user->nim);
-            })->count();
+        // Recent Projects yang user ikuti
+        $recentProjects = Project::whereHas('members', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
+            ->latest('updated_at')
+            ->take(5)
+            ->get()
+            ->map(function ($project) {
+                return [
+                    'type' => 'project',
+                    'title' => $project->judul,
+                    'status' => $project->status ?? 'aktif',
+                    'updated_at' => $project->updated_at,
+                ];
+            });
 
-        // Tugas dengan deadline < 3 hari ke depan (dan belum selesai)
-        $nearDeadlineTasks = Task::where('user_nim', $user->nim)
-            ->where('status', '!=', 'selesai')
-            ->whereDate('deadline', '<=', Carbon::now()->addDays(3))
-            ->whereDate('deadline', '>=', Carbon::now())
-            ->count();
-            
-        // Jumlah tugas yang baru saja ditambahkan
-        $recentProjects = Project::where('created_at', '>=', Carbon::now()->subWeek())
-            ->whereHas('tasks', function ($query) use ($user) {
-                $query->where('user_nim', $user->nim);
-            })->count();
+        // Gabungkan dan urutkan berdasarkan waktu terbaru
+        $recentActivities = $recentProjects
+            ->merge($recentTasks)
+            ->sortByDesc('updated_at')
+            ->take(7);
 
-        return view('dashboard', compact(
-            'projects',
-            'totalTasks',
-            'activeProjects',
-            'nearDeadlineTasks',
-            'recentProjects'
-        ));
+        // Ambil statistik proyek & tugas (berdasarkan keanggotaan project)
+        $stats = StatsController::getStats();
+
+        // Gabungkan data ke view
+        return view('dashboard', array_merge([
+            'projects' => $projects,
+            'recentActivities' => $recentActivities,
+        ], $stats));
     }
 }

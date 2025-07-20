@@ -17,22 +17,26 @@ class UserController extends Controller
     }
 
     public function search(Request $request)
-    {
-        $keyword = $request->get('query');
+{
+    $keyword = $request->get('query');
 
-        $users = User::with('prodi')
-            ->where('nama', 'like', "%{$keyword}%")
-            ->orWhere('nim', 'like', "%{$keyword}%")
-            ->orWhere('nidn', 'like', "%{$keyword}%")
-            ->orWhere('nip', 'like', "%{$keyword}%")
-            ->orWhere('email', 'like', "%{$keyword}%")
-            ->orWhere('role', 'like', "%{$keyword}%")
-            ->get();
+    $users = User::with('prodi')
+        ->where(function ($query) use ($keyword) {
+            $query->where('nama', 'like', "%{$keyword}%")
+                ->orWhere('nim', 'like', "%{$keyword}%")
+                ->orWhere('nidn', 'like', "%{$keyword}%")
+                ->orWhere('nip', 'like', "%{$keyword}%")
+                ->orWhere('email', 'like', "%{$keyword}%")
+                ->orWhere('role', 'like', "%{$keyword}%");
+        })
+        ->paginate(10) // ✅ ganti limit dengan paginate
+        ->appends(['query' => $keyword]); // ✅ agar pagination tetap bawa keyword
 
-        return response()->json([
-            'html' => view('users.partials.table-body', compact('users'))->render(),
-        ]);
-    }
+    return response()->json([
+        'html' => view('users.partials.tbody', compact('users'))->render(),
+        'pagination' => (string) $users->links(), // ✅ tambahkan pagination link
+    ]);
+}
 
     public function create()
     {
