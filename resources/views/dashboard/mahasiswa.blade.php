@@ -10,10 +10,12 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 mb-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
         @include('dashboard.partials.mahasiswa.count.projects')
 
         @include('dashboard.partials.mahasiswa.count.tasks')
+
+        @include('dashboard.partials.mahasiswa.count.completed')
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
