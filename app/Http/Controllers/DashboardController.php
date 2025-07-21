@@ -17,6 +17,7 @@ class DashboardController extends Controller
         $completedTasksCount = $this->getCompletedTasksCount($user->nim);
         $completedTasksLast7Days = $this->getCompletedTasksLast7Days($user->nim);
         $recentActivities = $this->getRecentActivities($user->id, $user->nim);
+        $nearDeadlineTasks = $this->getNearDeadlineTasks($user->nim);
         $stats = StatsController::getStats();
 
         return view('dashboard', array_merge([
@@ -24,7 +25,9 @@ class DashboardController extends Controller
             'recentActivities' => $recentActivities,
             'completedTasksCount' => $completedTasksCount,
             'completedTasksLast7Days' => $completedTasksLast7Days,
+            'nearDeadlineTasks' => $nearDeadlineTasks,
         ], $stats));
+
     }
 
     private function getUserProjects($userId, $userNim)
@@ -53,32 +56,87 @@ class DashboardController extends Controller
             ->count();
     }
 
+    private function getNearDeadlineTasks($userNim)
+    {
+        // $tasks = Task::where('user_nim', $userNim)
+        // ->where('status', '!=', 'selesai')
+        // ->whereBetween('deadline', [now(), now()->addDays(7)])
+        // ->orderBy('deadline', 'asc')
+        // ->get();
+
+        // dd($tasks);
+        
+        return Task::where('user_nim', $userNim)
+            ->where('status', '!=', 'selesai')
+            ->whereBetween('deadline', [now(), now()->addDays(7)])
+            ->orderBy('deadline', 'asc')
+            ->get()
+            ->map(function ($task) {
+                $task->days_remaining = Carbon::parse($task->deadline)->diffInDays(now());
+                return $task;
+            });
+    }
+
     private function getRecentActivities($userId, $userNim)
     {
-        $recentTasks = Task::where('user_nim', $userNim)
-            ->latest('updated_at')
-            ->take(5)
-            ->get()
-            ->map(fn ($task) => [
-                'type' => 'task',
-                'title' => $task->judul,
-                'status' => $task->status,
-                'updated_at' => $task->updated_at,
-            ]);
+        $user = Auth::user();
 
-        $recentProjects = Project::whereHas('members', fn ($q) => $q->where('user_id', $userId))
-            ->latest('updated_at')
-            ->take(5)
-            ->get()
-            ->map(fn ($project) => [
-                'type' => 'project',
-                'title' => $project->judul,
-                'status' => $project->status ?? 'aktif',
-                'updated_at' => $project->updated_at,
-            ]);
+        if ($user->role === 'dosen') {
+            // Ambil semua proyek dari mata kuliah yang diampu dosen
+            $projectIds = Project::whereHas('mataKuliah', function ($q) use ($userId) {
+                $q->where('dosen_id', $userId);
+            })->pluck('id');
+
+            $recentTasks = Task::whereIn('project_id', $projectIds)
+                ->latest('updated_at')
+                ->take(5)
+                ->get()
+                ->map(fn ($task) => [
+                    'type' => 'task',
+                    'title' => $task->judul,
+                    'status' => $task->status,
+                    'updated_at' => $task->updated_at,
+                ]);
+
+            $recentProjects = Project::whereIn('id', $projectIds)
+                ->latest('updated_at')
+                ->take(5)
+                ->get()
+                ->map(fn ($project) => [
+                    'type' => 'project',
+                    'title' => $project->judul,
+                    'status' => $project->status ?? 'aktif',
+                    'updated_at' => $project->updated_at,
+                ]);
+
+        } else {
+            // Mahasiswa
+            $recentTasks = Task::where('user_nim', $userNim)
+                ->latest('updated_at')
+                ->take(5)
+                ->get()
+                ->map(fn ($task) => [
+                    'type' => 'task',
+                    'title' => $task->judul,
+                    'status' => $task->status,
+                    'updated_at' => $task->updated_at,
+                ]);
+
+            $recentProjects = Project::whereHas('members', fn ($q) => $q->where('user_id', $userId))
+                ->latest('updated_at')
+                ->take(5)
+                ->get()
+                ->map(fn ($project) => [
+                    'type' => 'project',
+                    'title' => $project->judul,
+                    'status' => $project->status ?? 'aktif',
+                    'updated_at' => $project->updated_at,
+                ]);
+        }
 
         return $recentProjects->merge($recentTasks)
             ->sortByDesc('updated_at')
             ->take(7);
     }
+
 }

@@ -19,14 +19,16 @@
             >
                 {{ $activeProjects }}
             </p>
-            <div class="text-xs text-success flex items-center gap-1">
-                <i class="fas fa-arrow-up"></i>
-                @if ($recentProjects === 0)
+            @if ($recentProjects === 0)
+                <div class="text-xs text-secondary flex items-center gap-1">
                     Tidak ada proyek baru
-                @else
+                </div>
+            @else
+                <div class="text-xs text-success flex items-center gap-1">
+                    <i class="fas fa-arrow-up"></i>
                     {{ $recentProjects }} proyek baru minggu ini
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
     </div>
 </section>
