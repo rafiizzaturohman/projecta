@@ -68,9 +68,11 @@
                         </div>
 
                         <div
-                            class="p-3 bg-slate-200 dark:bg-slate-700 flex justify-end space-x-2"
+                            class="p-3 bg-slate-200 dark:bg-slate-700 flex justify-end md:justify-center lg:justify-center space-x-2"
                         >
                             <button
+                                type="button"
+                                onclick="window.location='{{ route('project.detail', $project->id) }}'"
                                 class="text-primary hover:text-primary-hover text-sm"
                             >
                                 Detail

@@ -80,6 +80,8 @@
                             </div>
 
                             <button
+                                type="button"
+                                onclick="window.location='{{ route('tasks.detail', $task->id) }}'"
                                 class="px-4 py-2 rounded-md transition delay-100 text-primary bg-gray-200 hover:bg-primary hover:text-white dark:hover:bg-primary-hover dark:bg-slate-700 text-sm"
                             >
                                 Detail

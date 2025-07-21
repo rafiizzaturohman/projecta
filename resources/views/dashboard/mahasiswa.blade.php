@@ -26,22 +26,32 @@
             <div x-data="{ activeSection: 'tasks' }" class="space-y-6">
                 <!-- Navigation -->
                 <div
-                    class="flex space-x-4 border-b border-border dark:border-dark-border"
+                    class="flex flex-row justify-between border-b border-border dark:border-dark-border"
                 >
-                    <button
-                        @click="activeSection = 'tasks'"
-                        :class="{ 'border-b-2 border-primary text-primary': activeSection === 'tasks' }"
-                        class="pb-3 px-1 font-medium"
-                    >
-                        Tugas Saya
-                    </button>
-                    <button
-                        @click="activeSection = 'projects'"
-                        :class="{ 'border-b-2 border-primary text-primary': activeSection === 'projects' }"
-                        class="pb-3 px-1 font-medium"
-                    >
-                        Proyek Saya
-                    </button>
+                    <div class="flex space-x-4">
+                        <button
+                            @click="activeSection = 'tasks'"
+                            :class="{ 'border-b-2 border-primary text-primary': activeSection === 'tasks' }"
+                            class="pb-3 px-1 font-medium"
+                        >
+                            Tugas Saya
+                        </button>
+                        <button
+                            @click="activeSection = 'projects'"
+                            :class="{ 'border-b-2 border-primary text-primary': activeSection === 'projects' }"
+                            class="pb-3 px-1 font-medium"
+                        >
+                            Proyek Saya
+                        </button>
+                    </div>
+
+                    <div>
+                        <x-text-input
+                            type="text"
+                            class="border-none"
+                            :placeholder="_('Search here...')"
+                        />
+                    </div>
                 </div>
 
                 @include('dashboard.partials.mahasiswa.lists.projects')

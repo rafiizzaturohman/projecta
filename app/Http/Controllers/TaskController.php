@@ -23,9 +23,23 @@ class TaskController extends Controller
         return view('tasks.index', compact('tasks'));
     }
 
+    public function detail($id)
+    {
+        $user = Auth::user();
+
+        $tasks = Task::with(['project', 'user'])
+            ->where('id', $id)
+            ->when($user->role === 'mahasiswa' && $user->nim, function ($query) use ($user) {
+                $query->where('user_nim', $user->nim);
+            })
+            ->firstOrFail();
+
+        return view('tasks.detail', compact('tasks'));
+    }
+
     public function create()
     {
-        $projects = Project::all(); // ambil semua project
+        $projects = Project::all();
         return view('tasks.create', compact('projects'));
     }
 

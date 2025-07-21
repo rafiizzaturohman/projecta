@@ -32,6 +32,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('userManagement/search', [UserController::class, 'search'])->name('userManagement.search');
     Route::resource('userManagement', UserController::class);
+
     Route::resource('prodis', ProdiController::class);
 });
 
@@ -53,8 +54,12 @@ Route::middleware(['auth', PreventBackHistory::class])->group(function () {
 
     // Project & Task management
     Route::resource('projects', ProjectController::class);
+    Route::get('/project/{id}/detail', [ProjectController::class, 'detail'])->name('project.detail');
+
     Route::resource('project_members', ProjectMemberController::class);
+
     Route::resource('tasks', TaskController::class);
+    Route::get('/task/{id}/detail', [TaskController::class, 'detail'])->name('tasks.detail');
 });
 
 // Auth scaffolding (breeze/jetstream/etc)
