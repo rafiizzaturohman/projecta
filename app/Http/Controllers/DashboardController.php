@@ -73,35 +73,35 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role === 'dosen') {
-            // Ambil semua proyek dari mata kuliah yang diampu dosen
-            $projectIds = Project::whereHas('mataKuliah', function ($q) use ($userId) {
-                $q->where('dosen_id', $userId);
-            })->pluck('id');
+        // if ($user->role === 'dosen') {
+        //     // Ambil semua proyek dari mata kuliah yang diampu dosen
+        //     $projectIds = Project::whereHas('mataKuliah', function ($q) use ($userId) {
+        //         $q->where('dosen_id', $userId);
+        //     })->pluck('id');
 
-            $recentTasks = Task::whereIn('project_id', $projectIds)
-                ->latest('updated_at')
-                ->take(5)
-                ->get()
-                ->map(fn ($task) => [
-                    'type' => 'task',
-                    'title' => $task->judul,
-                    'status' => $task->status,
-                    'updated_at' => $task->updated_at,
-                ]);
+        //     $recentTasks = Task::whereIn('project_id', $projectIds)
+        //         ->latest('updated_at')
+        //         ->take(5)
+        //         ->get()
+        //         ->map(fn ($task) => [
+        //             'type' => 'task',
+        //             'title' => $task->judul,
+        //             'status' => $task->status,
+        //             'updated_at' => $task->updated_at,
+        //         ]);
 
-            $recentProjects = Project::whereIn('id', $projectIds)
-                ->latest('updated_at')
-                ->take(5)
-                ->get()
-                ->map(fn ($project) => [
-                    'type' => 'project',
-                    'title' => $project->judul,
-                    'status' => $project->status ?? 'aktif',
-                    'updated_at' => $project->updated_at,
-                ]);
+        //     $recentProjects = Project::whereIn('id', $projectIds)
+        //         ->latest('updated_at')
+        //         ->take(5)
+        //         ->get()
+        //         ->map(fn ($project) => [
+        //             'type' => 'project',
+        //             'title' => $project->judul,
+        //             'status' => $project->status ?? 'aktif',
+        //             'updated_at' => $project->updated_at,
+        //         ]);
 
-        } else {
+        // } else {
             // Mahasiswa
             $recentTasks = Task::where('user_nim', $userNim)
                 ->latest('updated_at')
@@ -124,7 +124,7 @@ class DashboardController extends Controller
                     'status' => $project->status ?? 'aktif',
                     'updated_at' => $project->updated_at,
                 ]);
-        }
+        // }
 
         return $recentProjects->merge($recentTasks)
             ->sortByDesc('updated_at')
