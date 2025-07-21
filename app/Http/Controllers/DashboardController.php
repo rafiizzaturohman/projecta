@@ -58,14 +58,6 @@ class DashboardController extends Controller
 
     private function getNearDeadlineTasks($userNim)
     {
-        // $tasks = Task::where('user_nim', $userNim)
-        // ->where('status', '!=', 'selesai')
-        // ->whereBetween('deadline', [now(), now()->addDays(7)])
-        // ->orderBy('deadline', 'asc')
-        // ->get();
-
-        // dd($tasks);
-        
         return Task::where('user_nim', $userNim)
             ->where('status', '!=', 'selesai')
             ->whereBetween('deadline', [now(), now()->addDays(7)])

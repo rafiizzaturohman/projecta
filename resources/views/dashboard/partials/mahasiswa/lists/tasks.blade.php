@@ -10,7 +10,7 @@
             @foreach ($projects as $project)
                 @foreach ($project->tasks as $task)
                     <div
-                        class="border border-border dark:border-dark-border rounded-xl space-y-4 p-6 hover:shadow-soft transition-all hover:scale-101"
+                        class="border border-border dark:border-dark-border rounded-xl space-y-4 p-6 hover:shadow-soft transition-all hover:scale-[1.02] duration-500"
                     >
                         <div class="flex justify-between">
                             <div>
@@ -24,8 +24,8 @@
 
                             @php
                                 $statusColor = match ($task->status) {
-                                    'belum' => 'px-4 py-3 rounded-lg text-sm font-semibold tracking-wide bg-red-800',
-                                    'proses' => 'px-4 py-3 rounded-lg text-sm font-semibold tracking-wide bg-amber-500',
+                                    'belum' => 'px-4 py-3 rounded-lg text-sm font-semibold tracking-wide text-white bg-red-800',
+                                    'proses' => 'px-4 py-3 rounded-lg text-sm font-semibold tracking-wide text-white bg-amber-500',
                                     'selesai' => 'px-4 py-3 rounded-lg text-sm font-semibold tracking-wide text-white bg-teal-700',
                                     default => 'bg-gray-100 text-gray-600',
                                 };

@@ -11,62 +11,71 @@
                 @endphp
 
                 <div
-                    class="border border-border dark:border-dark-border rounded-xl overflow-hidden hover:shadow-soft transition-all hover:scale-101"
+                    class="border border-border dark:border-dark-border rounded-xl overflow-hidden hover:shadow-soft transition-all hover:scale-105 duration-500"
                 >
-                    <div class="p-5">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-lg">
-                                {{ $project->judul }}
-                            </h3>
-                            <span
-                                class="px-2 py-1 text-xs rounded-full bg-success/10 text-success"
-                            >
-                                {{ ucfirst($project->status) }}
-                            </span>
-                        </div>
-                        <p
-                            class="text-text-secondary dark:text-dark-text-secondary mt-2 text-sm"
-                        >
-                            {{ $project->deskripsi ?? 'Tidak ada deskripsi.' }}
-                        </p>
-
-                        <div class="mt-4">
-                            <div class="flex justify-between text-sm mb-1">
-                                <span>Progress</span>
-                                <span>{{ $progress }}%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div
-                                    class="bg-primary h-2 rounded-full transition-all duration-500"
-                                    style="width: {{ $progress }}%"
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 flex justify-between items-center">
-                            <div class="flex -space-x-2">
-                                <div
-                                    class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-white text-xs"
-                                >
-                                    {{ \Illuminate\Support\Str::upper(substr($project->mahasiswa->nama ?? '??', 0, 2)) }}
+                    <div class="flex flex-col md:flex-row lg:flex-row">
+                        <div class="p-5">
+                            <div>
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">
+                                        {{ $project->judul }}
+                                    </h3>
+                                    <span
+                                        class="px-2 py-1 text-xs rounded-full bg-success/10 text-success"
+                                    >
+                                        {{ ucfirst($project->status) }}
+                                    </span>
                                 </div>
-                                {{-- Tambahkan user lain jika perlu --}}
                             </div>
-                            <span class="text-xs text-text-secondary">
-                                Deadline:
-                                {{ \Carbon\Carbon::parse($project->deadline)->translatedFormat('d M Y') }}
-                            </span>
-                        </div>
-                    </div>
 
-                    <div
-                        class="px-5 py-3 bg-slate-200 dark:bg-slate-700 flex justify-end space-x-2"
-                    >
-                        <button
-                            class="text-primary hover:text-primary-hover text-sm"
+                            <div>
+                                <p
+                                    class="text-text-secondary dark:text-dark-text-secondary mt-2 text-sm"
+                                >
+                                    {{ $project->deskripsi ?? 'Tidak ada deskripsi.' }}
+                                </p>
+                            </div>
+
+                            <div class="mt-4">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Progress</span>
+                                    <span>{{ $progress }}%</span>
+                                </div>
+                                <div
+                                    class="w-full bg-gray-200 rounded-full h-2"
+                                >
+                                    <div
+                                        class="bg-primary h-2 rounded-full transition-all duration-500"
+                                        style="width: {{ $progress }}%"
+                                    ></div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 flex justify-between items-center">
+                                <div class="flex -space-x-2">
+                                    <div
+                                        class="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-white text-xs"
+                                    >
+                                        {{ \Illuminate\Support\Str::upper(substr($project->mahasiswa->nama ?? '??', 0, 2)) }}
+                                    </div>
+                                    {{-- Tambahkan user lain jika perlu --}}
+                                </div>
+                                <span class="text-sm text-text-secondary">
+                                    Deadline:
+                                    {{ \Carbon\Carbon::parse($project->deadline)->translatedFormat('d M Y') }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-3 bg-slate-200 dark:bg-slate-700 flex justify-end space-x-2"
                         >
-                            Detail
-                        </button>
+                            <button
+                                class="text-primary hover:text-primary-hover text-sm"
+                            >
+                                Detail
+                            </button>
+                        </div>
                     </div>
                 </div>
             @endforeach
