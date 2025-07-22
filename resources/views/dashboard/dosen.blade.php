@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-=======
-<section>
-    <h3 class="text-xl font-bold mb-2">Dosen Dashboard</h3>
-    <p>Welcome, {{ $userName }}! You can monitor student projects.</p>
-    
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
->>>>>>> 35fea0df9e02d0d80459c1ad20109fb93c4c85e8
                 <!-- Total Mata Kuliah -->
                 <div class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft p-5 flex items-start gap-4 hover:scale-101 transition-transform">
                     <div class="w-12 h-12 rounded-xl bg-primary/10 dark:bg-dark-primary/10 text-primary dark:text-dark-primary flex items-center justify-center text-xl">

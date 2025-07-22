@@ -32,25 +32,17 @@
                         <button
                             @click="activeSection = 'tasks'"
                             :class="{ 'border-b-2 border-primary text-primary': activeSection === 'tasks' }"
-                            class="pb-3 px-1 font-medium"
+                            class="pb-2 px-1 font-medium"
                         >
                             Tugas Saya
                         </button>
                         <button
                             @click="activeSection = 'projects'"
                             :class="{ 'border-b-2 border-primary text-primary': activeSection === 'projects' }"
-                            class="pb-3 px-1 font-medium"
+                            class="pb-2 px-1 font-medium"
                         >
                             Proyek Saya
                         </button>
-                    </div>
-
-                    <div>
-                        <x-text-input
-                            type="text"
-                            class="border-none"
-                            :placeholder="_('Search here...')"
-                        />
                     </div>
                 </div>
 
