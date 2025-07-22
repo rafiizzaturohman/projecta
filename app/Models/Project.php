@@ -68,4 +68,12 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    /**
+     * Relasi ke Project Members
+     */
+    public function members()
+{
+    return $this->hasMany(ProjectMember::class);
+}
 }

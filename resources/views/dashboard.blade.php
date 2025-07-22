@@ -322,15 +322,10 @@
 </div>
 
                     @elseif ($role === 'dosen')
-                        <h3 class="text-xl font-bold mb-2">Dosen Dashboard</h3>
-                        <p>Welcome, {{ $userName }}! You can monitor student projects.</p>
-                        <ul class="list-disc list-inside mt-3 text-text-secondary dark:text-dark-text-secondary">
-                            <li>View Assigned Courses</li>
-                            <li>Review Project Submissions</li>
-                        </ul>
+                        @include('dashboard.dosen')
 
                     @elseif ($role === 'mahasiswa')
-                        
+                        @include('dashboard.mahasiswa')
 
                         <div class="mb-8 flex justify-between items-start">
                             <div>
@@ -524,7 +519,9 @@
                             </div>
                         </div>
                     @endif
-
+                </div>
+            </div>
+        </div>
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2 w-80"></div>
 </x-app-layout>
