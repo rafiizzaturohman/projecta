@@ -1,34 +1,53 @@
-import Alpine from "alpinejs";
+import Alpine from 'alpinejs'
 
-window.Alpine = Alpine;
+window.Alpine = Alpine
 
-Alpine.start();
+Alpine.start()
 
-$(document).ready(() => {
-  $("#search").on("keyup", function () {
-    let query = $(this).val();
-    let url = $(this).data("url");
-    let target = $(this).data("target");
+let debounceTimer
+
+function fetchData(url) {
+    const query = $('#search').val()
+    const target = $('#search').data('target')
 
     $.ajax({
-      url: url,
-      type: "GET",
-      data: { query: query },
-      success: function (res) {
-        $(target).html(res.html);
-      },
-
-      error: function (err) {
-        console.error("Gagal mengambil data:", err);
-      },
-    });
-  });
-});
+        url: url,
+        type: 'GET',
+        data: { query: query },
+        success: function (res) {
+            $(target).html(res.html)
+            $('#pagination-links').html(res.pagination) // render pagination juga
+        },
+        error: function (err) {
+            console.error('Gagal mengambil data:', err)
+        },
+    })
+}
 
 $(document).ready(function () {
-  window.toast = {
-    success: function (message) {
-      const $toast = $(`
+    // Real-time search dengan debounce
+    $('#search').on('keyup', function () {
+        clearTimeout(debounceTimer)
+        debounceTimer = setTimeout(() => {
+            const url = $(this).data('url')
+            fetchData(url)
+        }, 300)
+    })
+
+    // Pagination AJAX
+    $(document).on('click', '#pagination-links a', function (e) {
+        e.preventDefault()
+        const url = $(this).attr('href')
+        if (url) {
+            fetchData(url)
+        }
+    })
+})
+
+$(document).ready(function () {
+    window.toast = {
+        success: function (message) {
+            const $toast = $(`
                 <div class="p-4 bg-success text-white rounded-lg shadow-soft flex items-center justify-between animate-fade-in">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,14 +61,14 @@ $(document).ready(function () {
                         </svg>
                     </button>
                 </div>
-            `);
+            `)
 
-      $("#toast-container").append($toast);
-      setTimeout(() => $toast.remove(), 5000);
-    },
+            $('#toast-container').append($toast)
+            setTimeout(() => $toast.remove(), 5000)
+        },
 
-    error: function (message) {
-      const $toast = $(`
+        error: function (message) {
+            const $toast = $(`
                 <div class="p-4 bg-danger text-white rounded-lg shadow-soft flex items-center justify-between animate-fade-in">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,15 +82,15 @@ $(document).ready(function () {
                         </svg>
                     </button>
                 </div>
-            `);
+            `)
 
-      $("#toast-container").append($toast);
-      setTimeout(() => $toast.remove(), 5000);
-    },
-  };
+            $('#toast-container').append($toast)
+            setTimeout(() => $toast.remove(), 5000)
+        },
+    }
 
-  // Event handler untuk close manual toast
-  $(document).on("click", ".close-toast", function () {
-    $(this).closest("div").remove();
-  });
-});
+    // Event handler untuk close manual toast
+    $(document).on('click', '.close-toast', function () {
+        $(this).closest('div').remove()
+    })
+})

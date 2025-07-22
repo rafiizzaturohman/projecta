@@ -13,38 +13,59 @@ class ProjectController extends Controller
     // Menampilkan semua project
     public function index()
     {
-        $projects = Project::with(['prodi', 'matakuliah', 'mahasiswa'])->get();
+        $user = Auth::user();
+
+        $projects = Project::with(['prodi', 'matakuliah', 'mahasiswa'])
+            ->whereHas('members', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
+            ->get();
+
         return view('projects.index', compact('projects'));
+    }
+
+    public function detail($id) 
+    {
+        $user = Auth::user();
+
+        $projects = Project::with(['prodi', 'matakuliah', 'mahasiswa'])
+            ->where('id', $id)
+            ->whereHas('members', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
+            ->firstOrFail();
+
+        return view('projects.detail', compact('projects'));
     }
 
     // Menyimpan project baru
     public function store(Request $request)
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    $validated = $request->validate([
-        'judul' => 'required|string',
-        'deskripsi' => 'nullable|string',
-        'deadline' => 'nullable|date',
-        'kd_prodi' => 'required|exists:prodis,kd_prodi',
-        'kd_matakuliah' => 'required|exists:matakuliahs,kd_matakuliah',
-        'mahasiswa_nim' => 'required|exists:users,nim',
-        'status' => 'in:belum,proses,selesai',
-    ]);
-
-    // Simpan project
-    $project = Project::create($validated);
-
-    // Jika user yang login adalah mahasiswa → jadikan ketua otomatis
-    if ($user->role === 'mahasiswa') {
-        $project->members()->create([
-            'user_id' => $user->id,
-            'role' => 'ketua',
+        $validated = $request->validate([
+            'judul' => 'required|string',
+            'deskripsi' => 'nullable|string',
+            'deadline' => 'nullable|date',
+            'kd_prodi' => 'required|exists:prodis,kd_prodi',
+            'kd_matakuliah' => 'required|exists:matakuliahs,kd_matakuliah',
+            'mahasiswa_nim' => 'required|exists:users,nim',
+            'status' => 'in:belum,proses,selesai',
         ]);
-    }
 
-    return redirect()->route('projects.index')->with('success', 'Project berhasil dibuat.');
-}
+        // Simpan project
+        $project = Project::create($validated);
+
+        // Jika user yang login adalah mahasiswa → jadikan ketua otomatis
+        if ($user->role === 'mahasiswa') {
+            $project->members()->create([
+                'user_id' => $user->id,
+                'role' => 'ketua',
+            ]);
+        }
+
+        return redirect()->route('projects.index')->with('success', 'Project berhasil dibuat.');
+    }
 
 
     // Menampilkan detail satu project

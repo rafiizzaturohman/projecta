@@ -1,592 +1,603 @@
-<!-- Stats Cards -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-    <!-- Total Proyek -->
-    <div
-        class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft p-5 flex items-start gap-4 hover:scale-101 transition-transform"
-    >
-        <div
-            class="w-12 h-12 rounded-xl bg-primary/10 dark:bg-dark-primary/10 text-primary dark:text-dark-primary flex items-center justify-center text-xl"
-        >
-            <i class="fas fa-project-diagram"></i>
-        </div>
-        <div>
-            <h3
-                class="text-sm text-text-secondary dark:text-dark-text-secondary font-medium"
-            >
-                Total Proyek
-            </h3>
-            <p
-                class="text-2xl font-bold my-1 text-text-primary dark:text-dark-text-primary"
-            >
-                14
-            </p>
-            <div class="text-xs text-success flex items-center gap-1">
-                <i class="fas fa-arrow-up"></i>
-                2 baru minggu ini
-            </div>
-        </div>
+<section>
+    <div class="p-4">
+        <h3 class="text-xl font-bold mb-2">Admin Dashboard</h3>
+        <p>Welcome, {{ $userName }}! You can monitor all user projects.</p>
     </div>
 
-    <!-- Tugas Aktif -->
-    <div
-        class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft p-5 flex items-start gap-4 hover:scale-101 transition-transform"
-    >
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+        <!-- Total Proyek -->
         <div
-            class="w-12 h-12 rounded-xl bg-success/10 text-success flex items-center justify-center text-xl"
-        >
-            <i class="fas fa-tasks"></i>
-        </div>
-        <div>
-            <h3
-                class="text-sm text-text-secondary dark:text-dark-text-secondary font-medium"
-            >
-                Tugas Aktif
-            </h3>
-            <p
-                class="text-2xl font-bold my-1 text-text-primary dark:text-dark-text-primary"
-            >
-                36
-            </p>
-            <div class="text-xs text-danger flex items-center gap-1">
-                <i class="fas fa-arrow-down"></i>
-                5 selesai hari ini
-            </div>
-        </div>
-    </div>
-
-    <!-- Anggota Tim -->
-    <div
-        class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft p-5 flex items-start gap-4 hover:scale-101 transition-transform"
-    >
-        <div
-            class="w-12 h-12 rounded-xl bg-secondary/10 dark:bg-dark-secondary/10 text-secondary dark:text-dark-secondary flex items-center justify-center text-xl"
-        >
-            <i class="fas fa-users"></i>
-        </div>
-        <div>
-            <h3
-                class="text-sm text-text-secondary dark:text-dark-text-secondary font-medium"
-            >
-                Anggota Tim
-            </h3>
-            <p
-                class="text-2xl font-bold my-1 text-text-primary dark:text-dark-text-primary"
-            >
-                8
-            </p>
-            <div class="text-xs text-info flex items-center gap-1">
-                <!-- <i class="fas fa-arrow-up"></i>
-                2 baru bulan ini -->
-            </div>
-        </div>
-    </div>
-
-    <!-- dosen pengampuh -->
-    <div
-        class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft p-5 flex items-start gap-4 hover:scale-101 transition-transform"
-    >
-        <div
-            class="w-12 h-12 rounded-xl bg-danger/10 text-danger flex items-center justify-center text-xl"
-        >
-            <i class="fas fa-calendar-times"></i>
-        </div>
-        <div>
-            <h3
-                class="text-sm text-text-secondary dark:text-dark-text-secondary font-medium"
-            >
-                Dosen Pengampuh
-            </h3>
-            <p
-                class="text-2xl font-bold my-1 text-text-primary dark:text-dark-text-primary"
-            >
-                3
-            </p>
-            <div class="text-xs text-warning flex items-center gap-1">
-                <!-- <i class="fas fa-exclamation-circle"></i>
-                7 hari lagi -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Main Content Grid -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    <!-- Left Column (2/3 width) -->
-    <div class="lg:col-span-2 space-y-6">
-        <!-- Projects Panel -->
-        <div
-            class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft overflow-hidden"
+            class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft p-5 flex items-start gap-4 hover:scale-101 transition-transform"
         >
             <div
-                class="border-b border-border dark:border-dark-border px-5 py-4 flex justify-between items-center"
+                class="w-12 h-12 rounded-xl bg-primary/10 dark:bg-dark-primary/10 text-primary dark:text-dark-primary flex items-center justify-center text-xl"
             >
-                <h2
-                    class="font-semibold text-text-primary dark:text-dark-text-primary"
-                >
-                    Proyek Terkini
-                </h2>
-                <button
-                    class="text-sm text-primary dark:text-dark-primary font-medium hover:text-primary-hover dark:hover:text-dark-primary-hover transition-colors"
-                >
-                    Lihat Semua
-                </button>
+                <i class="fas fa-project-diagram"></i>
             </div>
-            <div class="p-5 space-y-4">
-                <!-- Project 1 -->
-                <div
-                    class="border border-border dark:border-dark-border rounded-xl p-4 hover:border-primary dark:hover:border-dark-primary hover:shadow-soft transition-all cursor-pointer hover:scale-[1.005]"
+            <div>
+                <h3
+                    class="text-sm text-text-secondary dark:text-dark-text-secondary font-medium"
                 >
-                    <div class="flex justify-between items-start mb-3">
-                        <h3
-                            class="font-semibold text-text-primary dark:text-dark-text-primary"
-                        >
-                            Website Redesign
-                        </h3>
-                        <span
-                            class="bg-success/10 text-success text-xs px-2.5 py-0.5 rounded-full"
-                        >
-                            Dalam Progress
-                        </span>
-                    </div>
-                    <div class="flex gap-4 mb-4">
-                        <div
-                            class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
-                        >
-                            <i class="far fa-calendar-alt"></i>
-                            <span>15 Jun - 30 Jul 2023</span>
-                        </div>
-                        <div
-                            class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
-                        >
-                            <i class="far fa-clock"></i>
-                            <span>45% Complete</span>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <div
-                            class="flex justify-between text-sm text-text-secondary dark:text-dark-text-secondary mb-1"
-                        >
-                            <span>Progress</span>
-                            <span>45%</span>
-                        </div>
-                        <div
-                            class="w-full bg-border dark:bg-dark-border rounded-full h-1.5"
-                        >
-                            <div
-                                class="bg-primary dark:bg-dark-primary h-1.5 rounded-full"
-                                style="width: 45%"
-                            ></div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div class="flex -space-x-2">
-                            <div
-                                class="w-8 h-8 rounded-full bg-info/10 text-info flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
-                            >
-                                AM
-                            </div>
-                            <div
-                                class="w-8 h-8 rounded-full bg-secondary/10 dark:bg-dark-secondary/10 text-secondary dark:text-dark-secondary flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
-                            >
-                                TS
-                            </div>
-                            <div
-                                class="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
-                            >
-                                RJ
-                            </div>
-                            <div
-                                class="w-8 h-8 rounded-full bg-border dark:bg-dark-border text-text-secondary dark:text-dark-text-secondary flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
-                            >
-                                +2
-                            </div>
-                        </div>
-                        <div
-                            class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
-                        >
-                            <i class="far fa-comment-alt"></i>
-                            <span>12</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div
-                    class="border border-border dark:border-dark-border rounded-xl p-4 hover:border-primary dark:hover:border-dark-primary hover:shadow-soft transition-all cursor-pointer hover:scale-[1.005]"
+                    Total Proyek
+                </h3>
+                <p
+                    class="text-2xl font-bold my-1 text-text-primary dark:text-dark-text-primary"
                 >
-                    <div class="flex justify-between items-start mb-3">
-                        <h3
-                            class="font-semibold text-text-primary dark:text-dark-text-primary"
-                        >
-                            Mobile App Development
-                        </h3>
-                        <span
-                            class="bg-info/10 text-info text-xs px-2.5 py-0.5 rounded-full"
-                        >
-                            Perencanaan
-                        </span>
-                    </div>
-                    <div class="flex gap-4 mb-4">
-                        <div
-                            class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
-                        >
-                            <i class="far fa-calendar-alt"></i>
-                            <span>1 Jul - 15 Sep 2023</span>
-                        </div>
-                        <div
-                            class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
-                        >
-                            <i class="far fa-clock"></i>
-                            <span>15% Complete</span>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <div
-                            class="flex justify-between text-sm text-text-secondary dark:text-dark-text-secondary mb-1"
-                        >
-                            <span>Progress</span>
-                            <span>15%</span>
-                        </div>
-                        <div
-                            class="w-full bg-border dark:bg-dark-border rounded-full h-1.5"
-                        >
-                            <div
-                                class="bg-primary dark:bg-dark-primary h-1.5 rounded-full"
-                                style="width: 15%"
-                            ></div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div class="flex -space-x-2">
-                            <div
-                                class="w-8 h-8 rounded-full bg-success/10 text-success flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
-                            >
-                                KL
-                            </div>
-                            <div
-                                class="w-8 h-8 rounded-full bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
-                            >
-                                MP
-                            </div>
-                            <div
-                                class="w-8 h-8 rounded-full bg-border dark:bg-dark-border text-text-secondary dark:text-dark-text-secondary flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
-                            >
-                                +3
-                            </div>
-                        </div>
-                        <div
-                            class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
-                        >
-                            <i class="far fa-comment-alt"></i>
-                            <span>5</span>
-                        </div>
-                    </div>
+                    14
+                </p>
+                <div class="text-xs text-success flex items-center gap-1">
+                    <i class="fas fa-arrow-up"></i>
+                    2 baru minggu ini
                 </div>
             </div>
         </div>
 
-        <!-- Tasks Panel -->
+        <!-- Tugas Aktif -->
         <div
-            class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft overflow-hidden"
+            class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft p-5 flex items-start gap-4 hover:scale-101 transition-transform"
         >
             <div
-                class="border-b border-border dark:border-dark-border px-5 py-4 flex justify-between items-center"
+                class="w-12 h-12 rounded-xl bg-success/10 text-success flex items-center justify-center text-xl"
             >
-                <h2
-                    class="font-semibold text-text-primary dark:text-dark-text-primary"
-                >
-                    Tugas Saya
-                </h2>
-                <button
-                    class="text-sm text-primary dark:text-dark-primary font-medium hover:text-primary-hover dark:hover:text-dark-primary-hover transition-colors"
-                >
-                    Lihat Semua
-                </button>
+                <i class="fas fa-tasks"></i>
             </div>
-            <div class="p-5 space-y-3">
-                <!-- Task 1 -->
-                <div
-                    class="flex items-center p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-colors"
+            <div>
+                <h3
+                    class="text-sm text-text-secondary dark:text-dark-text-secondary font-medium"
                 >
-                    <input
-                        type="checkbox"
-                        class="w-4 h-4 text-primary dark:text-dark-primary rounded border-border dark:border-dark-border focus:ring-primary/50 dark:focus:ring-dark-primary/50 mr-3"
-                    />
-                    <div class="flex-1">
+                    Tugas Aktif
+                </h3>
+                <p
+                    class="text-2xl font-bold my-1 text-text-primary dark:text-dark-text-primary"
+                >
+                    36
+                </p>
+                <div class="text-xs text-danger flex items-center gap-1">
+                    <i class="fas fa-arrow-down"></i>
+                    5 selesai hari ini
+                </div>
+            </div>
+        </div>
+
+        <!-- Anggota Tim -->
+        <div
+            class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft p-5 flex items-start gap-4 hover:scale-101 transition-transform"
+        >
+            <div
+                class="w-12 h-12 rounded-xl bg-secondary/10 dark:bg-dark-secondary/10 text-secondary dark:text-dark-secondary flex items-center justify-center text-xl"
+            >
+                <i class="fas fa-users"></i>
+            </div>
+            <div>
+                <h3
+                    class="text-sm text-text-secondary dark:text-dark-text-secondary font-medium"
+                >
+                    Anggota Tim
+                </h3>
+                <p
+                    class="text-2xl font-bold my-1 text-text-primary dark:text-dark-text-primary"
+                >
+                    8
+                </p>
+                <div class="text-xs text-info flex items-center gap-1">
+                    <!-- <i class="fas fa-arrow-up"></i>
+                    2 baru bulan ini -->
+                </div>
+            </div>
+        </div>
+
+        <!-- dosen pengampuh -->
+        <div
+            class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft p-5 flex items-start gap-4 hover:scale-101 transition-transform"
+        >
+            <div
+                class="w-12 h-12 rounded-xl bg-danger/10 text-danger flex items-center justify-center text-xl"
+            >
+                <i class="fas fa-calendar-times"></i>
+            </div>
+            <div>
+                <h3
+                    class="text-sm text-text-secondary dark:text-dark-text-secondary font-medium"
+                >
+                    Dosen Pengampuh
+                </h3>
+                <p
+                    class="text-2xl font-bold my-1 text-text-primary dark:text-dark-text-primary"
+                >
+                    3
+                </p>
+                <div class="text-xs text-warning flex items-center gap-1">
+                    <!-- <i class="fas fa-exclamation-circle"></i>
+                    7 hari lagi -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left Column (2/3 width) -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Projects Panel -->
+            <div
+                class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft overflow-hidden"
+            >
+                <div
+                    class="border-b border-border dark:border-dark-border px-5 py-4 flex justify-between items-center"
+                >
+                    <h2
+                        class="font-semibold text-text-primary dark:text-dark-text-primary"
+                    >
+                        Proyek Terkini
+                    </h2>
+                    <button
+                        class="text-sm text-primary dark:text-dark-primary font-medium hover:text-primary-hover dark:hover:text-dark-primary-hover transition-colors"
+                    >
+                        Lihat Semua
+                    </button>
+                </div>
+                <div class="p-5 space-y-4">
+                    <!-- Project 1 -->
+                    <div
+                        class="border border-border dark:border-dark-border rounded-xl p-4 hover:border-primary dark:hover:border-dark-primary hover:shadow-soft transition-all cursor-pointer hover:scale-[1.005]"
+                    >
+                        <div class="flex justify-between items-start mb-3">
+                            <h3
+                                class="font-semibold text-text-primary dark:text-dark-text-primary"
+                            >
+                                Website Redesign
+                            </h3>
+                            <span
+                                class="bg-success/10 text-success text-xs px-2.5 py-0.5 rounded-full"
+                            >
+                                Dalam Progress
+                            </span>
+                        </div>
+                        <div class="flex gap-4 mb-4">
+                            <div
+                                class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
+                            >
+                                <i class="far fa-calendar-alt"></i>
+                                <span>15 Jun - 30 Jul 2023</span>
+                            </div>
+                            <div
+                                class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
+                            >
+                                <i class="far fa-clock"></i>
+                                <span>45% Complete</span>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div
+                                class="flex justify-between text-sm text-text-secondary dark:text-dark-text-secondary mb-1"
+                            >
+                                <span>Progress</span>
+                                <span>45%</span>
+                            </div>
+                            <div
+                                class="w-full bg-border dark:bg-dark-border rounded-full h-1.5"
+                            >
+                                <div
+                                    class="bg-primary dark:bg-dark-primary h-1.5 rounded-full"
+                                    style="width: 45%"
+                                ></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex -space-x-2">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-info/10 text-info flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
+                                >
+                                    AM
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-secondary/10 dark:bg-dark-secondary/10 text-secondary dark:text-dark-secondary flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
+                                >
+                                    TS
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
+                                >
+                                    RJ
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-border dark:bg-dark-border text-text-secondary dark:text-dark-text-secondary flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
+                                >
+                                    +2
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
+                            >
+                                <i class="far fa-comment-alt"></i>
+                                <span>12</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div
+                        class="border border-border dark:border-dark-border rounded-xl p-4 hover:border-primary dark:hover:border-dark-primary hover:shadow-soft transition-all cursor-pointer hover:scale-[1.005]"
+                    >
+                        <div class="flex justify-between items-start mb-3">
+                            <h3
+                                class="font-semibold text-text-primary dark:text-dark-text-primary"
+                            >
+                                Mobile App Development
+                            </h3>
+                            <span
+                                class="bg-info/10 text-info text-xs px-2.5 py-0.5 rounded-full"
+                            >
+                                Perencanaan
+                            </span>
+                        </div>
+                        <div class="flex gap-4 mb-4">
+                            <div
+                                class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
+                            >
+                                <i class="far fa-calendar-alt"></i>
+                                <span>1 Jul - 15 Sep 2023</span>
+                            </div>
+                            <div
+                                class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
+                            >
+                                <i class="far fa-clock"></i>
+                                <span>15% Complete</span>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div
+                                class="flex justify-between text-sm text-text-secondary dark:text-dark-text-secondary mb-1"
+                            >
+                                <span>Progress</span>
+                                <span>15%</span>
+                            </div>
+                            <div
+                                class="w-full bg-border dark:bg-dark-border rounded-full h-1.5"
+                            >
+                                <div
+                                    class="bg-primary dark:bg-dark-primary h-1.5 rounded-full"
+                                    style="width: 15%"
+                                ></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex -space-x-2">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-success/10 text-success flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
+                                >
+                                    KL
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
+                                >
+                                    MP
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-border dark:bg-dark-border text-text-secondary dark:text-dark-text-secondary flex items-center justify-center text-xs font-bold border-2 border-surface dark:border-dark-surface"
+                                >
+                                    +3
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center gap-1 text-sm text-text-secondary dark:text-dark-text-secondary"
+                            >
+                                <i class="far fa-comment-alt"></i>
+                                <span>5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks Panel -->
+            <div
+                class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft overflow-hidden"
+            >
+                <div
+                    class="border-b border-border dark:border-dark-border px-5 py-4 flex justify-between items-center"
+                >
+                    <h2
+                        class="font-semibold text-text-primary dark:text-dark-text-primary"
+                    >
+                        Tugas Saya
+                    </h2>
+                    <button
+                        class="text-sm text-primary dark:text-dark-primary font-medium hover:text-primary-hover dark:hover:text-dark-primary-hover transition-colors"
+                    >
+                        Lihat Semua
+                    </button>
+                </div>
+                <div class="p-5 space-y-3">
+                    <!-- Task 1 -->
+                    <div
+                        class="flex items-center p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-colors"
+                    >
+                        <input
+                            type="checkbox"
+                            class="w-4 h-4 text-primary dark:text-dark-primary rounded border-border dark:border-dark-border focus:ring-primary/50 dark:focus:ring-dark-primary/50 mr-3"
+                        />
+                        <div class="flex-1">
+                            <div
+                                class="font-medium text-text-primary dark:text-dark-text-primary"
+                            >
+                                Mendesain UI homepage baru
+                            </div>
+                            <div
+                                class="text-sm text-text-secondary dark:text-dark-text-secondary"
+                            >
+                                Website Redesign
+                            </div>
+                        </div>
+                        <div class="w-2 h-2 rounded-full bg-danger ml-4"></div>
+                    </div>
+
+                    <!-- Task 2 -->
+                    <div
+                        class="flex items-center p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-colors"
+                    >
+                        <input
+                            type="checkbox"
+                            class="w-4 h-4 text-primary dark:text-dark-primary rounded border-border dark:border-dark-border focus:ring-primary/50 dark:focus:ring-dark-primary/50 mr-3"
+                        />
+                        <div class="flex-1">
+                            <div
+                                class="font-medium text-text-primary dark:text-dark-text-primary"
+                            >
+                                Membuat dokumentasi API
+                            </div>
+                            <div
+                                class="text-sm text-text-secondary dark:text-dark-text-secondary"
+                            >
+                                Mobile App Development
+                            </div>
+                        </div>
+                        <div class="w-2 h-2 rounded-full bg-warning ml-4"></div>
+                    </div>
+
+                    <!-- Task 3 -->
+                    <div
+                        class="flex items-center p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-colors"
+                    >
+                        <input
+                            type="checkbox"
+                            class="w-4 h-4 text-primary dark:text-dark-primary rounded border-border dark:border-dark-border focus:ring-primary/50 dark:focus:ring-dark-primary/50 mr-3"
+                            checked
+                        />
+                        <div class="flex-1">
+                            <div
+                                class="font-medium line-through text-text-secondary dark:text-dark-text-secondary"
+                            >
+                                Meeting dengan klien
+                            </div>
+                            <div
+                                class="text-sm text-text-secondary dark:text-dark-text-secondary"
+                            >
+                                ProjectFlow Marketing
+                            </div>
+                        </div>
+                        <div class="w-2 h-2 rounded-full bg-success ml-4"></div>
+                    </div>
+
+                    <!-- Task 4 -->
+                    <div
+                        class="flex items-center p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-colors"
+                    >
+                        <input
+                            type="checkbox"
+                            class="w-4 h-4 text-primary dark:text-dark-primary rounded border-border dark:border-dark-border focus:ring-primary/50 dark:focus:ring-dark-primary/50 mr-3"
+                        />
+                        <div class="flex-1">
+                            <div
+                                class="font-medium text-text-primary dark:text-dark-text-primary"
+                            >
+                                Review kode frontend
+                            </div>
+                            <div
+                                class="text-sm text-text-secondary dark:text-dark-text-secondary"
+                            >
+                                Website Redesign
+                            </div>
+                        </div>
+                        <div class="w-2 h-2 rounded-full bg-danger ml-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column (1/3 width) -->
+        <div class="space-y-6">
+            <!-- Activity Panel -->
+            <div
+                class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft overflow-hidden"
+            >
+                <div
+                    class="border-b border-border dark:border-dark-border px-5 py-4"
+                >
+                    <h2
+                        class="font-semibold text-text-primary dark:text-dark-text-primary"
+                    >
+                        Aktivitas Terkini
+                    </h2>
+                </div>
+                <div class="p-5 space-y-4">
+                    <!-- Activity 1 -->
+                    <div class="flex gap-3">
+                        <div
+                            class="w-9 h-9 rounded-full bg-info/10 text-info flex items-center justify-center font-semibold flex-shrink-0"
+                        >
+                            AM
+                        </div>
+                        <div>
+                            <p
+                                class="text-sm text-text-primary dark:text-dark-text-primary"
+                            >
+                                <strong>Andi Maulana</strong>
+                                mengupdate status proyek
+                                <strong>Website Redesign</strong>
+                                menjadi 45%
+                            </p>
+                            <p
+                                class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1"
+                            >
+                                30 menit yang lalu
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Activity 2 -->
+                    <div class="flex gap-3">
+                        <div
+                            class="w-9 h-9 rounded-full bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 flex items-center justify-center font-semibold flex-shrink-0"
+                        >
+                            RJ
+                        </div>
+                        <div>
+                            <p
+                                class="text-sm text-text-primary dark:text-dark-text-primary"
+                            >
+                                <strong>Rina Juliani</strong>
+                                mengupload file baru di proyek
+                                <strong>Mobile App Development</strong>
+                            </p>
+                            <p
+                                class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1"
+                            >
+                                2 jam yang lalu
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Activity 3 -->
+                    <div class="flex gap-3">
+                        <div
+                            class="w-9 h-9 rounded-full bg-secondary/10 dark:bg-dark-secondary/10 text-secondary dark:text-dark-secondary flex items-center justify-center font-semibold flex-shrink-0"
+                        >
+                            TS
+                        </div>
+                        <div>
+                            <p
+                                class="text-sm text-text-primary dark:text-dark-text-primary"
+                            >
+                                <strong>Tono Sutrisno</strong>
+                                menyelesaikan tugas
+                                <strong>Mendesain UI homepage baru</strong>
+                            </p>
+                            <p
+                                class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1"
+                            >
+                                5 jam yang lalu
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Activity 4 -->
+                    <div class="flex gap-3">
+                        <div
+                            class="w-9 h-9 rounded-full bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 flex items-center justify-center font-semibold flex-shrink-0"
+                        >
+                            MP
+                        </div>
+                        <div>
+                            <p
+                                class="text-sm text-text-primary dark:text-dark-text-primary"
+                            >
+                                <strong>Maya Purnama</strong>
+                                menambahkan komentar pada tugas
+                                <strong>Review kode frontend</strong>
+                            </p>
+                            <p
+                                class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1"
+                            >
+                                Kemarin, 16:45
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deadline Panel -->
+            <div
+                class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft overflow-hidden"
+            >
+                <div
+                    class="border-b border-border dark:border-dark-border px-5 py-4"
+                >
+                    <h2
+                        class="font-semibold text-text-primary dark:text-dark-text-primary"
+                    >
+                        Deadline Mendekat
+                    </h2>
+                </div>
+                <div class="p-5 space-y-4">
+                    <!-- Deadline 1 -->
+                    <div
+                        class="p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background cursor-pointer transition-colors"
+                    >
                         <div
                             class="font-medium text-text-primary dark:text-dark-text-primary"
                         >
-                            Mendesain UI homepage baru
+                            Presentasi ke klien
                         </div>
                         <div
-                            class="text-sm text-text-secondary dark:text-dark-text-secondary"
-                        >
-                            Website Redesign
-                        </div>
-                    </div>
-                    <div class="w-2 h-2 rounded-full bg-danger ml-4"></div>
-                </div>
-
-                <!-- Task 2 -->
-                <div
-                    class="flex items-center p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-colors"
-                >
-                    <input
-                        type="checkbox"
-                        class="w-4 h-4 text-primary dark:text-dark-primary rounded border-border dark:border-dark-border focus:ring-primary/50 dark:focus:ring-dark-primary/50 mr-3"
-                    />
-                    <div class="flex-1">
-                        <div
-                            class="font-medium text-text-primary dark:text-dark-text-primary"
-                        >
-                            Membuat dokumentasi API
-                        </div>
-                        <div
-                            class="text-sm text-text-secondary dark:text-dark-text-secondary"
-                        >
-                            Mobile App Development
-                        </div>
-                    </div>
-                    <div class="w-2 h-2 rounded-full bg-warning ml-4"></div>
-                </div>
-
-                <!-- Task 3 -->
-                <div
-                    class="flex items-center p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-colors"
-                >
-                    <input
-                        type="checkbox"
-                        class="w-4 h-4 text-primary dark:text-dark-primary rounded border-border dark:border-dark-border focus:ring-primary/50 dark:focus:ring-dark-primary/50 mr-3"
-                        checked
-                    />
-                    <div class="flex-1">
-                        <div
-                            class="font-medium line-through text-text-secondary dark:text-dark-text-secondary"
-                        >
-                            Meeting dengan klien
-                        </div>
-                        <div
-                            class="text-sm text-text-secondary dark:text-dark-text-secondary"
+                            class="text-sm text-text-secondary dark:text-dark-text-secondary mb-1"
                         >
                             ProjectFlow Marketing
                         </div>
+                        <div
+                            class="flex items-center gap-1 text-xs text-danger"
+                        >
+                            <i class="far fa-clock"></i>
+                            <span>Deadline: Besok, 10:00</span>
+                        </div>
                     </div>
-                    <div class="w-2 h-2 rounded-full bg-success ml-4"></div>
-                </div>
 
-                <!-- Task 4 -->
-                <div
-                    class="flex items-center p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background transition-colors"
-                >
-                    <input
-                        type="checkbox"
-                        class="w-4 h-4 text-primary dark:text-dark-primary rounded border-border dark:border-dark-border focus:ring-primary/50 dark:focus:ring-dark-primary/50 mr-3"
-                    />
-                    <div class="flex-1">
+                    <!-- Deadline 2 -->
+                    <div
+                        class="p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background cursor-pointer transition-colors"
+                    >
                         <div
                             class="font-medium text-text-primary dark:text-dark-text-primary"
                         >
-                            Review kode frontend
+                            Sprint review meeting
                         </div>
                         <div
-                            class="text-sm text-text-secondary dark:text-dark-text-secondary"
+                            class="text-sm text-text-secondary dark:text-dark-text-secondary mb-1"
                         >
                             Website Redesign
                         </div>
+                        <div
+                            class="flex items-center gap-1 text-xs text-warning"
+                        >
+                            <i class="far fa-clock"></i>
+                            <span>Deadline: 2 hari lagi</span>
+                        </div>
                     </div>
-                    <div class="w-2 h-2 rounded-full bg-danger ml-4"></div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Right Column (1/3 width) -->
-    <div class="space-y-6">
-        <!-- Activity Panel -->
-        <div
-            class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft overflow-hidden"
-        >
-            <div
-                class="border-b border-border dark:border-dark-border px-5 py-4"
-            >
-                <h2
-                    class="font-semibold text-text-primary dark:text-dark-text-primary"
-                >
-                    Aktivitas Terkini
-                </h2>
-            </div>
-            <div class="p-5 space-y-4">
-                <!-- Activity 1 -->
-                <div class="flex gap-3">
+                    <!-- Deadline 3 -->
                     <div
-                        class="w-9 h-9 rounded-full bg-info/10 text-info flex items-center justify-center font-semibold flex-shrink-0"
+                        class="p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background cursor-pointer transition-colors"
                     >
-                        AM
-                    </div>
-                    <div>
-                        <p
-                            class="text-sm text-text-primary dark:text-dark-text-primary"
+                        <div
+                            class="font-medium text-text-primary dark:text-dark-text-primary"
                         >
-                            <strong>Andi Maulana</strong>
-                            mengupdate status proyek
-                            <strong>Website Redesign</strong>
-                            menjadi 45%
-                        </p>
-                        <p
-                            class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1"
+                            Pengumpulan laporan bulanan
+                        </div>
+                        <div
+                            class="text-sm text-text-secondary dark:text-dark-text-secondary mb-1"
                         >
-                            30 menit yang lalu
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Activity 2 -->
-                <div class="flex gap-3">
-                    <div
-                        class="w-9 h-9 rounded-full bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 flex items-center justify-center font-semibold flex-shrink-0"
-                    >
-                        RJ
-                    </div>
-                    <div>
-                        <p
-                            class="text-sm text-text-primary dark:text-dark-text-primary"
+                            Tim Manajemen
+                        </div>
+                        <div
+                            class="flex items-center gap-1 text-xs text-text-secondary dark:text-dark-text-secondary"
                         >
-                            <strong>Rina Juliani</strong>
-                            mengupload file baru di proyek
-                            <strong>Mobile App Development</strong>
-                        </p>
-                        <p
-                            class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1"
-                        >
-                            2 jam yang lalu
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Activity 3 -->
-                <div class="flex gap-3">
-                    <div
-                        class="w-9 h-9 rounded-full bg-secondary/10 dark:bg-dark-secondary/10 text-secondary dark:text-dark-secondary flex items-center justify-center font-semibold flex-shrink-0"
-                    >
-                        TS
-                    </div>
-                    <div>
-                        <p
-                            class="text-sm text-text-primary dark:text-dark-text-primary"
-                        >
-                            <strong>Tono Sutrisno</strong>
-                            menyelesaikan tugas
-                            <strong>Mendesain UI homepage baru</strong>
-                        </p>
-                        <p
-                            class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1"
-                        >
-                            5 jam yang lalu
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Activity 4 -->
-                <div class="flex gap-3">
-                    <div
-                        class="w-9 h-9 rounded-full bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 flex items-center justify-center font-semibold flex-shrink-0"
-                    >
-                        MP
-                    </div>
-                    <div>
-                        <p
-                            class="text-sm text-text-primary dark:text-dark-text-primary"
-                        >
-                            <strong>Maya Purnama</strong>
-                            menambahkan komentar pada tugas
-                            <strong>Review kode frontend</strong>
-                        </p>
-                        <p
-                            class="text-xs text-text-secondary dark:text-dark-text-secondary mt-1"
-                        >
-                            Kemarin, 16:45
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Deadline Panel -->
-        <div
-            class="bg-surface dark:bg-dark-surface rounded-2xl shadow-soft overflow-hidden"
-        >
-            <div
-                class="border-b border-border dark:border-dark-border px-5 py-4"
-            >
-                <h2
-                    class="font-semibold text-text-primary dark:text-dark-text-primary"
-                >
-                    Deadline Mendekat
-                </h2>
-            </div>
-            <div class="p-5 space-y-4">
-                <!-- Deadline 1 -->
-                <div
-                    class="p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background cursor-pointer transition-colors"
-                >
-                    <div
-                        class="font-medium text-text-primary dark:text-dark-text-primary"
-                    >
-                        Presentasi ke klien
-                    </div>
-                    <div
-                        class="text-sm text-text-secondary dark:text-dark-text-secondary mb-1"
-                    >
-                        ProjectFlow Marketing
-                    </div>
-                    <div class="flex items-center gap-1 text-xs text-danger">
-                        <i class="far fa-clock"></i>
-                        <span>Deadline: Besok, 10:00</span>
-                    </div>
-                </div>
-
-                <!-- Deadline 2 -->
-                <div
-                    class="p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background cursor-pointer transition-colors"
-                >
-                    <div
-                        class="font-medium text-text-primary dark:text-dark-text-primary"
-                    >
-                        Sprint review meeting
-                    </div>
-                    <div
-                        class="text-sm text-text-secondary dark:text-dark-text-secondary mb-1"
-                    >
-                        Website Redesign
-                    </div>
-                    <div class="flex items-center gap-1 text-xs text-warning">
-                        <i class="far fa-clock"></i>
-                        <span>Deadline: 2 hari lagi</span>
-                    </div>
-                </div>
-
-                <!-- Deadline 3 -->
-                <div
-                    class="p-3 rounded-lg hover:bg-background dark:hover:bg-dark-background cursor-pointer transition-colors"
-                >
-                    <div
-                        class="font-medium text-text-primary dark:text-dark-text-primary"
-                    >
-                        Pengumpulan laporan bulanan
-                    </div>
-                    <div
-                        class="text-sm text-text-secondary dark:text-dark-text-secondary mb-1"
-                    >
-                        Tim Manajemen
-                    </div>
-                    <div
-                        class="flex items-center gap-1 text-xs text-text-secondary dark:text-dark-text-secondary"
-                    >
-                        <i class="far fa-clock"></i>
-                        <span>Deadline: 3 hari lagi</span>
+                            <i class="far fa-clock"></i>
+                            <span>Deadline: 3 hari lagi</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
